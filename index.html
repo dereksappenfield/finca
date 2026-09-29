@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Finca</title>
+<meta name="theme-color" content="#245C3F">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Finca">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF1EA; --surface:#FFFFFF; --ink:#17231C; --muted:#56655A; --line:#CBD3C4;
+  --green:#245C3F; --green-ink:#FFFFFF; --maize:#E9B82F; --panela:#7A4E2D; --warn:#B3261E; --soft:#DDE6D6;
+  --body:"Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --head:"Bricolage Grotesque", "Atkinson Hyperlegible", system-ui, sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#111713; --surface:#1A231D; --ink:#E6ECE3; --muted:#A4B2A7; --line:#2E3B32;
+    --green:#6FBF8E; --green-ink:#0E1A12; --maize:#F0C54A; --panela:#C99467; --warn:#FF8A80; --soft:#23302760;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111713; --surface:#1A231D; --ink:#E6ECE3; --muted:#A4B2A7; --line:#2E3B32;
+  --green:#6FBF8E; --green-ink:#0E1A12; --maize:#F0C54A; --panela:#C99467; --warn:#FF8A80; --soft:#23302760;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 var(--body);-webkit-tap-highlight-color:transparent}
+h1,h2,h3{font-family:var(--head);line-height:1.1;margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--maize);outline-offset:2px}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px 150px}
+
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+header.top .row{max-width:720px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:10px}
+.farm{font-family:var(--head);font-weight:800;font-size:20px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pill{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:14px;display:flex;align-items:center;gap:6px;cursor:pointer;white-space:nowrap}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--green)}
+.dot.pend{background:var(--maize)} .dot.off{background:var(--muted)}
+.lang{border:0;background:none;font-weight:700;padding:6px 4px;cursor:pointer;color:var(--muted)}
+
+.hero{padding:22px 0 8px}
+.hero h1{font-size:clamp(34px,9vw,52px);font-weight:800;letter-spacing:-.02em}
+.hero p{margin:6px 0 0;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:18px 0 6px;border-top:2px solid var(--ink);border-bottom:1px solid var(--line)}
+.stat{padding:12px 4px;border-right:1px solid var(--line)} .stat:last-child{border-right:0}
+.stat b{display:block;font-family:var(--head);font-size:32px;font-weight:800;line-height:1}
+.stat span{font-size:14px;color:var(--muted)}
+
+h2.sec{font-size:22px;margin:26px 0 10px;display:flex;align-items:baseline;gap:10px}
+h2.sec small{font-family:var(--body);font-weight:400;font-size:14px;color:var(--muted)}
+.list{list-style:none;margin:0;padding:0;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.list li{border-bottom:1px solid var(--line)} .list li:last-child{border-bottom:0}
+.rowbtn{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:0;padding:14px;cursor:pointer;min-height:60px}
+.rowbtn:active{background:var(--soft)}
+.ico{font-size:26px;width:40px;text-align:center;flex:none}
+.rt{flex:1;min-width:0} .rt b{display:block} .rt span{color:var(--muted);font-size:14px}
+.qty{font-family:var(--head);font-weight:800;font-size:20px;text-align:right;white-space:nowrap}
+.qty small{font-family:var(--body);font-weight:400;font-size:13px;color:var(--muted);display:block}
+.chip{display:inline-block;font-size:13px;padding:2px 9px;border-radius:999px;background:var(--soft);border:1px solid var(--line);white-space:nowrap}
+.chip.low{background:transparent;border-color:var(--warn);color:var(--warn);font-weight:700}
+.chip.done{border-color:var(--green);color:var(--green)}
+.empty{padding:22px 16px;color:var(--muted);text-align:center}
+.empty button{margin-top:10px}
+
+.tools{display:flex;gap:8px;margin:14px 0 4px;flex-wrap:wrap}
+.search{flex:1;min-width:180px;border:1.5px solid var(--line);background:var(--surface);border-radius:12px;padding:12px 14px}
+.btn{border:0;border-radius:12px;padding:13px 18px;font-weight:700;cursor:pointer;min-height:50px;background:var(--green);color:var(--green-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn.warn{background:transparent;color:var(--warn);border:1.5px solid var(--warn)}
+.btn.small{min-height:40px;padding:8px 14px;font-size:15px}
+.btn:disabled{opacity:.5}
+.filters{display:flex;gap:6px;overflow-x:auto;padding:6px 0 10px}
+.filters button{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 14px;white-space:nowrap;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+/* lifecycle track: the one bold element */
+.track{display:flex;margin:16px 0 8px;gap:3px}
+.track button{flex:1;border:0;background:var(--soft);padding:10px 2px 8px;font-size:12px;line-height:1.2;cursor:pointer;color:var(--muted);position:relative;min-height:58px;border-radius:4px}
+.track button::before{content:"";display:block;height:8px;border-radius:4px;margin:0 6px 8px;background:var(--line)}
+.track button.past{color:var(--ink)} .track button.past::before{background:var(--green)}
+.track button.now{background:var(--maize);color:#1d1a0c;font-weight:700} .track button.now::before{background:#1d1a0c}
+
+.detail-head{padding:18px 0 4px;display:flex;gap:14px;align-items:flex-start}
+.detail-head .ico{font-size:44px;width:56px}
+.detail-head h1{font-size:32px;font-weight:800}
+.back{background:none;border:0;padding:12px 0 0;color:var(--muted);cursor:pointer;font-weight:700}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:12px 0}
+.facts div{background:var(--surface);padding:10px 12px}
+.facts span{display:block;font-size:13px;color:var(--muted)}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.tl li{padding:12px 14px;display:flex;gap:12px}
+.tl .d{font-size:13px;color:var(--muted);width:78px;flex:none}
+.tl .x{flex:1;min-width:0}
+.tl .void{text-decoration:line-through;opacity:.55}
+.steps li{display:flex;align-items:center;gap:12px;padding:12px 14px}
+.steps input{width:26px;height:26px;accent-color:var(--green)}
+.note{color:var(--muted);font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;margin:10px 0}
+.card p{margin:0 0 10px}
+
+nav.bar{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav.bar .in{max-width:720px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
+nav.bar button{background:none;border:0;padding:8px 2px 10px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:12px;cursor:pointer;color:var(--muted);min-height:62px}
+nav.bar button b{font-size:24px;font-weight:400;line-height:1}
+nav.bar button[aria-current="page"]{color:var(--ink);font-weight:700;box-shadow:inset 0 3px 0 var(--green)}
+.fab{position:fixed;right:max(16px,calc(50% - 344px));bottom:calc(78px + env(safe-area-inset-bottom,0px));z-index:7;border:0;border-radius:18px;padding:16px 22px;font-weight:700;font-size:18px;background:var(--maize);color:#1d1a0c;box-shadow:0 6px 18px rgba(20,40,25,.28);cursor:pointer}
+
+dialog{border:0;padding:0;width:min(560px,100%);max-height:92vh;border-radius:18px 18px 0 0;margin:auto auto 0;background:var(--surface);color:var(--ink)}
+@media (min-width:640px){dialog{border-radius:18px;margin:auto}}
+dialog::backdrop{background:rgba(10,20,12,.5)}
+dialog form{padding:18px 18px calc(18px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:12px;overflow:auto;max-height:92vh}
+dialog h2{font-size:24px}
+label{display:flex;flex-direction:column;gap:4px;font-weight:700;font-size:15px}
+label input,label select,label textarea{font-weight:400;border:1.5px solid var(--line);border-radius:10px;padding:12px;background:var(--bg);min-height:48px;width:100%}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dlg-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:6px;position:sticky;bottom:0;background:var(--surface);padding-top:8px}
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.quick button{border:1.5px solid var(--line);background:var(--bg);border-radius:14px;padding:16px 10px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;font-weight:700;min-height:96px}
+.quick button b{font-size:30px;font-weight:400}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(150px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:12px;z-index:20;max-width:90vw;font-weight:700}
+@media (prefers-reduced-motion:no-preference){.toast{animation:pop .2s ease-out}@keyframes pop{from{opacity:0;transform:translate(-50%,8px)}}}
+.hide{display:none!important}
+</style>
+</head>
+<body>
+<header class="top"><div class="row">
+  <div class="farm" id="farmName"></div>
+  <button class="pill" id="syncPill" type="button"><span class="dot" id="syncDot"></span><span id="syncTxt"></span></button>
+  <button class="lang" id="langBtn" type="button"></button>
+</div></header>
+<main class="wrap" id="view"></main>
+<button class="fab" id="fab" type="button"></button>
+<nav class="bar"><div class="in" id="nav"></div></nav>
+<dialog id="dlg"><form id="dlgForm" method="dialog"></form></dialog>
+
+<script>
+"use strict";
+/* ---------- i18n ---------- */
+const TX={
+es:{home:"Inicio",animals:"Animales",crops:"Cultivos",stock:"Bodega",process:"Procesos",cloud:"Respaldo",log:"+ Registrar",
+today:"Hoy en la finca",todayN:n=>n===1?"1 registro hoy":`${n} registros hoy`,active:"activos",lots:"lotes activos",lowStock:"con poco stock",
+attention:"Revisar",recent:"Actividad reciente",noActivity:"Aún no hay registros. Empiece agregando un animal, un lote o un producto.",
+synced:"Respaldado",pending:n=>`${n} sin respaldar`,offline:"Sin señal",local:"Solo en el teléfono",
+search:"Buscar…",all:"Todos",newAnimal:"Nuevo animal",newCrop:"Nuevo lote",newStock:"Nuevo producto o insumo",newTemplate:"Nuevo proceso",
+noAnimals:"No hay animales registrados.",noCrops:"No hay lotes de cultivo.",noStock:"La bodega está vacía.",noTemplates:"No hay procesos definidos. Un proceso convierte un producto en otro, por ejemplo café cereza → café pergamino seco.",
+tag:"Número / chapeta",name:"Nombre",species:"Especie",breed:"Raza",sex:"Sexo",female:"Hembra",male:"Macho",born:"Fecha de nacimiento",stage:"Etapa",weight:"Peso",
+crop:"Cultivo",plot:"Lote / parcela",area:"Área (ha)",planted:"Fecha de siembra",category:"Tipo",product:"Producto",supply:"Insumo",unit:"Unidad",initial:"Cantidad inicial",minQty:"Avisar cuando baje de",
+save:"Guardar",cancel:"Cancelar",close:"Cerrar",back:"‹ Volver",edit:"Editar",remove:"Eliminar",addEvent:"Registrar evento",
+date:"Fecha",type:"Tipo de evento",qty:"Cantidad",price:"Precio total (COP)",note:"Nota",useSupply:"Insumo usado (opcional)",useQty:"Cantidad de insumo",toProduct:"Guardar cosecha en",none:"— Ninguno —",
+history:"Historial",noHistory:"Sin eventos todavía.",lastWeight:"Último peso",age:"Edad",inStock:"En bodega",movements:"Movimientos",entry:"Entrada",exit:"Salida",
+inputP:"Producto que entra",outputP:"Producto que sale",steps:"Pasos (uno por línea)",start:"Iniciar",runs:"Lotes en proceso",templates:"Procesos",
+startRun:"Iniciar proceso",inputQty:"Cantidad que entra",outputQty:"Cantidad obtenida",finish:"Terminar proceso",inProgress:"En proceso",finished:"Terminado",
+stepsDone:(a,b)=>`${a} de ${b} pasos`,yield:"Rendimiento",source:"Origen",from:"de",voidEv:"Anular",voided:"Anulado",confirmDel:"¿Eliminar este registro? Se marcará como eliminado en todos los teléfonos.",
+syncNow:"Sincronizar ahora",syncing:"Sincronizando…",syncDone:"Sincronización lista",syncFail:"No se pudo sincronizar. Los datos siguen guardados en el teléfono; intente cuando haya señal.",
+cloudNA:"La nube no está disponible en esta vista. Todo se guarda en este teléfono; use la copia de seguridad para pasar datos.",
+lastSync:"Última sincronización",never:"nunca",settings:"Ajustes",farmName:"Nombre de la finca",backup:"Copia de seguridad",
+exportCsv:"Descargar movimientos (CSV)",exportInv:"Descargar inventario (CSV)",exportJson:"Descargar copia completa (JSON)",importJson:"Restaurar desde copia (JSON)",
+imported:n=>`${n} registros combinados`,badFile:"Ese archivo no es una copia de esta app.",saved:"Guardado",
+cloudHelp:"Todo se guarda en este teléfono y funciona sin internet. Para no perder datos, comparta una copia de seguridad cada semana (WhatsApp, correo o AirDrop). Para juntar datos de varios teléfonos, restaure la copia de cada uno en un solo teléfono: los registros se combinan sin duplicarse.",shareJson:"Compartir copia de seguridad",lastBackup:"Última copia",persistOk:"El teléfono protegerá estos datos.",updateReady:"Hay una versión nueva. Toque para actualizar.",
+storageErr:"No se pudo guardar en el teléfono. Libere espacio y descargue una copia de seguridad.",
+quickTitle:"¿Qué quiere registrar?",qAnimalEv:"Evento de animal",qCropEv:"Labor de cultivo",qMove:"Entrada / salida de bodega",qRun:"Iniciar proceso",
+pick:"Elija…",required:"Complete los campos marcados.",days:"días",months:"meses",years:"años",theme:"Tema",
+},
+en:{home:"Home",animals:"Animals",crops:"Crops",stock:"Storage",process:"Processes",cloud:"Backup",log:"+ Log",
+today:"Today on the farm",todayN:n=>n===1?"1 record today":`${n} records today`,active:"active",lots:"active lots",lowStock:"running low",
+attention:"Needs attention",recent:"Recent activity",noActivity:"No records yet. Start by adding an animal, a crop lot or a product.",
+synced:"Backed up",pending:n=>`${n} not backed up`,offline:"No signal",local:"On this phone only",
+search:"Search…",all:"All",newAnimal:"New animal",newCrop:"New lot",newStock:"New product or supply",newTemplate:"New process",
+noAnimals:"No animals yet.",noCrops:"No crop lots yet.",noStock:"Storage is empty.",noTemplates:"No processes defined. A process turns one product into another, e.g. coffee cherry → dry parchment coffee.",
+tag:"Tag number",name:"Name",species:"Species",breed:"Breed",sex:"Sex",female:"Female",male:"Male",born:"Birth date",stage:"Stage",weight:"Weight",
+crop:"Crop",plot:"Lot / plot",area:"Area (ha)",planted:"Planting date",category:"Type",product:"Product",supply:"Supply",unit:"Unit",initial:"Starting quantity",minQty:"Warn when below",
+save:"Save",cancel:"Cancel",close:"Close",back:"‹ Back",edit:"Edit",remove:"Delete",addEvent:"Log event",
+date:"Date",type:"Event type",qty:"Quantity",price:"Total price (COP)",note:"Note",useSupply:"Supply used (optional)",useQty:"Supply quantity",toProduct:"Store harvest as",none:"— None —",
+history:"History",noHistory:"No events yet.",lastWeight:"Last weight",age:"Age",inStock:"In storage",movements:"Movements",entry:"In",exit:"Out",
+inputP:"Input product",outputP:"Output product",steps:"Steps (one per line)",start:"Start",runs:"Batches in progress",templates:"Processes",
+startRun:"Start process",inputQty:"Input quantity",outputQty:"Output quantity",finish:"Finish process",inProgress:"In progress",finished:"Finished",
+stepsDone:(a,b)=>`${a} of ${b} steps`,yield:"Yield",source:"Source",from:"from",voidEv:"Void",voided:"Voided",confirmDel:"Delete this record? It will be marked deleted on every phone.",
+syncNow:"Sync now",syncing:"Syncing…",syncDone:"Sync complete",syncFail:"Sync failed. Your data is still saved on the phone; try again when there's signal.",
+cloudNA:"Cloud isn't available in this view. Everything is saved on this phone; use a backup file to move data.",
+lastSync:"Last sync",never:"never",settings:"Settings",farmName:"Farm name",backup:"Backup",
+exportCsv:"Download movements (CSV)",exportInv:"Download inventory (CSV)",exportJson:"Download full backup (JSON)",importJson:"Restore from backup (JSON)",
+imported:n=>`${n} records merged`,badFile:"That file isn't a backup from this app.",saved:"Saved",
+cloudHelp:"Everything is saved on this phone and works without internet. To avoid losing data, share a backup every week (WhatsApp, email or AirDrop). To combine data from several phones, restore each phone's backup on one phone: records merge without duplicates.",shareJson:"Share backup",lastBackup:"Last backup",persistOk:"This phone will protect this data.",updateReady:"A new version is ready. Tap to update.",
+storageErr:"Couldn't save on this phone. Free up space and download a backup.",
+quickTitle:"What do you want to log?",qAnimalEv:"Animal event",qCropEv:"Crop task",qMove:"Storage in / out",qRun:"Start process",
+pick:"Choose…",required:"Fill in the required fields.",days:"days",months:"months",years:"years",theme:"Theme",
+}};
+const LBL={
+es:{species:{bovine:"Bovino",pig:"Porcino",horse:"Equino",goat:"Caprino",sheep:"Ovino",poultry:"Aves",fish:"Peces",other:"Otro"},
+ astage:{young:"Cría",growing:"Levante",finishing:"Ceba / novilla",production:"Producción",sold:"Vendido",dead:"Muerto"},
+ cstage:{prep:"Preparación",planted:"Sembrado",growing:"Crecimiento",flowering:"Floración",harvest:"Cosecha",closed:"Terminado"},
+ crops:{coffee:"Café",plantain:"Plátano",banana:"Banano",corn:"Maíz",cassava:"Yuca",cacao:"Cacao",avocado:"Aguacate",potato:"Papa",beans:"Fríjol",sugarcane:"Caña",pasture:"Pasto",other:"Otro"},
+ units:{kg:"kg",lb:"libra",arroba:"arroba (12,5 kg)",carga:"carga (125 kg)",bulto:"bulto",l:"litro",unit:"unidad"},
+ ev:{weight:"Pesaje",vaccine:"Vacuna",treatment:"Tratamiento",move:"Cambio de potrero",birth:"Parto",milk:"Ordeño",sale:"Venta",death:"Muerte",note:"Nota",stage:"Cambio de etapa",
+   fertilize:"Abono",spray:"Fumigación",weed:"Desyerbe",irrigate:"Riego",harvest:"Cosecha",in:"Entrada",out:"Salida / consumo",adjust:"Ajuste de inventario"}},
+en:{species:{bovine:"Cattle",pig:"Pig",horse:"Horse",goat:"Goat",sheep:"Sheep",poultry:"Poultry",fish:"Fish",other:"Other"},
+ astage:{young:"Calf / young",growing:"Growing",finishing:"Finishing / heifer",production:"Production",sold:"Sold",dead:"Dead"},
+ cstage:{prep:"Land prep",planted:"Planted",growing:"Growing",flowering:"Flowering",harvest:"Harvest",closed:"Closed"},
+ crops:{coffee:"Coffee",plantain:"Plantain",banana:"Banana",corn:"Corn",cassava:"Cassava",cacao:"Cacao",avocado:"Avocado",potato:"Potato",beans:"Beans",sugarcane:"Sugarcane",pasture:"Pasture",other:"Other"},
+ units:{kg:"kg",lb:"lb",arroba:"arroba (12.5 kg)",carga:"carga (125 kg)",bulto:"sack",l:"liter",unit:"unit"},
+ ev:{weight:"Weighing",vaccine:"Vaccine",treatment:"Treatment",move:"Pasture move",birth:"Birth",milk:"Milking",sale:"Sale",death:"Death",note:"Note",stage:"Stage change",
+   fertilize:"Fertilizer",spray:"Spraying",weed:"Weeding",irrigate:"Irrigation",harvest:"Harvest",in:"In",out:"Out / used",adjust:"Stock adjustment"}}};
+const SPECIES_ICO={bovine:"🐄",pig:"🐖",horse:"🐎",goat:"🐐",sheep:"🐑",poultry:"🐔",fish:"🐟",other:"🐾"};
+const CROP_ICO={coffee:"☕",plantain:"🍌",banana:"🍌",corn:"🌽",cassava:"🥔",cacao:"🍫",avocado:"🥑",potato:"🥔",beans:"🫘",sugarcane:"🎋",pasture:"🌾",other:"🌱"};
+const ASTAGES=["young","growing","finishing","production","sold","dead"];
+const CSTAGES=["prep","planted","growing","flowering","harvest","closed"];
+const AEVENTS=["weight","vaccine","treatment","move","milk","birth","sale","death","note"];
+const CEVENTS=["fertilize","spray","weed","irrigate","harvest","note"];
+const SEVENTS=["in","out","sale","adjust"];
+const UNITS=["kg","lb","arroba","carga","bulto","l","unit"];
+
+/* ---------- state ---------- */
+const KEY="finca-app-v1";
+let S=null, route={tab:"home"}, filt="all", q="";
+const blank=()=>({farm:"",lang:"es",items:{},events:{},dirty:{items:{},events:{}},lastSync:null});
+function load(){try{S=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){S=null}
+  if(!S||typeof S!=="object")S=blank(); for(const k of ["items","events","dirty"])if(!S[k])S[k]={};
+  S.dirty.items=S.dirty.items||{};S.dirty.events=S.dirty.events||{};}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){toast(t("storageErr"))} renderChrome(); scheduleSync();}
+const t=(k,...a)=>{const v=TX[S.lang][k]??TX.es[k]??k;return typeof v==="function"?v(...a):v};
+const L=(g,k)=>LBL[S.lang][g][k]??k;
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const uid=()=>(crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2,10));
+const nowIso=()=>new Date().toISOString();
+const today=()=>{const d=new Date();return new Date(d-d.getTimezoneOffset()*6e4).toISOString().slice(0,10)};
+const num=v=>{const n=parseFloat(String(v).replace(",","."));return isFinite(n)?n:0};
+const fmt=n=>(Math.round(n*100)/100).toLocaleString(S.lang==="es"?"es-CO":"en-US");
+const cop=n=>new Intl.NumberFormat("es-CO",{style:"currency",currency:"COP",maximumFractionDigits:0}).format(n);
+const fdate=d=>{if(!d)return"";const x=new Date(d+"T12:00:00");return x.toLocaleDateString(S.lang==="es"?"es-CO":"en-US",{day:"numeric",month:"short",year:"2-digit"})};
+
+function putItem(it){it.updatedAt=nowIso();if(!it.createdAt)it.createdAt=it.updatedAt;S.items[it.id]=it;S.dirty.items[it.id]=1;}
+function addEv(ev){ev.id=uid();ev.createdAt=ev.updatedAt=nowIso();ev.date=ev.date||today();S.events[ev.id]=ev;S.dirty.events[ev.id]=1;return ev;}
+const items=kind=>Object.values(S.items).filter(i=>i.kind===kind&&!i.deleted);
+const evsOf=id=>Object.values(S.events).filter(e=>e.itemId===id).sort((a,b)=>(b.date+b.createdAt).localeCompare(a.date+a.createdAt));
+function stockQty(id){let q=0;for(const e of Object.values(S.events)){if(e.itemId!==id||e.voided)continue;
+  if(e.type==="in")q+=num(e.qty);else if(e.type==="out"||e.type==="sale")q-=num(e.qty);else if(e.type==="adjust")q+=num(e.qty);}return q;}
+const isLow=s=>s.min!=null&&s.min!==""&&stockQty(s.id)<=num(s.min);
+const pendingCount=()=>Object.keys(S.dirty.items).length+Object.keys(S.dirty.events).length;
+function lastWeight(id){const w=evsOf(id).find(e=>e.type==="weight"&&!e.voided);return w?`${fmt(num(w.qty))} ${w.unit||"kg"}`:"—"}
+function ageOf(born){if(!born)return"—";const d=(Date.now()-new Date(born+"T12:00:00"))/864e5;if(d<60)return`${Math.max(0,Math.round(d))} ${t("days")}`;if(d<730)return`${Math.round(d/30.4)} ${t("months")}`;return`${fmt(d/365.25)} ${t("years")}`}
+function itemTitle(i){if(!i)return"?";if(i.kind==="animal")return(i.tag?`#${i.tag} `:"")+(i.name||"");if(i.kind==="crop")return`${i.plot||""} · ${i.crop==="other"&&i.cropOther?i.cropOther:L("crops",i.crop)}`;return i.name||"";}
+function itemIco(i){if(!i)return"•";if(i.kind==="animal")return SPECIES_ICO[i.species]||"🐾";if(i.kind==="crop")return CROP_ICO[i.crop]||"🌱";if(i.kind==="stock")return i.category==="supply"?"🧴":"📦";if(i.kind==="template")return"⚙️";if(i.kind==="run")return"🔄";return"•"}
+
+/* ---------- chrome ---------- */
+const TABS=[["home","🏠"],["animals","🐄"],["crops","🌱"],["stock","📦"],["process","⚙️"]];
+let online=navigator.onLine, syncing=false;
+function renderChrome(){
+  document.documentElement.lang=S.lang;
+  document.getElementById("farmName").textContent=S.farm||(S.lang==="es"?"Mi finca":"My farm");
+  document.getElementById("langBtn").textContent=S.lang==="es"?"EN":"ES";
+  document.getElementById("langBtn").setAttribute("aria-label",S.lang==="es"?"Switch to English":"Cambiar a español");
+  document.getElementById("fab").textContent=t("log");
+  const n=pendingCount(),dot=document.getElementById("syncDot"),tx=document.getElementById("syncTxt");
+  dot.className="dot"+(n?" pend":"");
+  tx.textContent=n?t("pending",n):(S.lastSync?t("synced"):t("local"));
+  document.getElementById("nav").innerHTML=TABS.map(([k,ic])=>`<button type="button" data-tab="${k}" ${route.tab===k?'aria-current="page"':""}><b aria-hidden="true">${ic}</b>${esc(t(k))}</button>`).join("");
+}
+function go(r){route=r;filt="all";q="";render();window.scrollTo(0,0)}
+function render(){renderChrome();const v=document.getElementById("view");
+  const f={home:vHome,animals:vAnimals,crops:vCrops,stock:vStock,process:vProcess,cloud:vCloud,item:vItem}[route.tab]||vHome;v.innerHTML=f();
+  document.getElementById("fab").classList.toggle("hide",route.tab==="cloud");}
+
+/* ---------- views ---------- */
+function row(i,right,sub){return `<li><button type="button" class="rowbtn" data-open="${i.id}"><span class="ico" aria-hidden="true">${itemIco(i)}</span><span class="rt"><b>${esc(itemTitle(i))}</b><span>${sub}</span></span>${right||""}</button></li>`}
+function evLine(e){const it=S.items[e.itemId];const q=e.qty!=null&&e.qty!==""?` · ${fmt(num(e.qty))} ${esc(L("units",e.unit||"")||"")}`:"";
+  return `<li class="${e.voided?"void":""}"><button type="button" class="rowbtn" data-open="${e.itemId}"><span class="ico" aria-hidden="true">${itemIco(it)}</span><span class="rt"><b>${esc(L("ev",e.type))}${q}</b><span>${esc(itemTitle(it))} · ${fdate(e.date)}</span></span></button></li>`}
+function vHome(){
+  const an=items("animal").filter(a=>!["sold","dead"].includes(a.stage)),cr=items("crop").filter(c=>c.stage!=="closed"),st=items("stock"),low=st.filter(isLow);
+  const runs=items("run").filter(r=>r.status!=="done");
+  const evs=Object.values(S.events).sort((a,b)=>(b.date+b.createdAt).localeCompare(a.date+a.createdAt));
+  const nToday=evs.filter(e=>e.date===today()).length;
+  const d=new Date().toLocaleDateString(S.lang==="es"?"es-CO":"en-US",{weekday:"long",day:"numeric",month:"long"});
+  let h=`<section class="hero"><h1>${esc(t("today"))}</h1><p>${esc(d)} — ${esc(t("todayN",nToday))}</p>
+  <div class="stats"><div class="stat"><b>${an.length}</b><span>${esc(t("animals").toLowerCase())} ${esc(t("active"))}</span></div>
+  <div class="stat"><b>${cr.length}</b><span>${esc(t("lots"))}</span></div>
+  <div class="stat"><b>${low.length}</b><span>${esc(t("lowStock"))}</span></div></div></section>`;
+  if(low.length||runs.length){h+=`<h2 class="sec">${esc(t("attention"))}</h2><ul class="list">`+
+    low.map(s=>row(s,`<span class="qty">${fmt(stockQty(s.id))}<small>${esc(L("units",s.unit))}</small></span>`,`<span class="chip low">${esc(t("lowStock"))}</span>`)).join("")+
+    runs.map(r=>{const tp=S.items[r.templateId];return row(r,"",`${esc(t("inProgress"))} · ${esc(t("stepsDone",(r.done||[]).length,(tp?.steps||[]).length))}`)}).join("")+`</ul>`}
+  h+=`<h2 class="sec">${esc(t("recent"))}</h2>`;
+  h+=evs.length?`<ul class="list">${evs.slice(0,12).map(evLine).join("")}</ul>`:`<div class="card empty">${esc(t("noActivity"))}</div>`;
+  return h;}
+function tools(newKey,newAct){return `<div class="tools"><input class="search" type="search" id="q" placeholder="${esc(t("search"))}" value="${esc(q)}" aria-label="${esc(t("search"))}"><button type="button" class="btn" data-act="${newAct}">+ ${esc(t(newKey))}</button></div>`}
+const match=i=>!q||JSON.stringify(i).toLowerCase().includes(q.toLowerCase());
+function vAnimals(){
+  const all=items("animal");const sp=[...new Set(all.map(a=>a.species))];
+  const list=all.filter(a=>(filt==="all"||a.species===filt)&&match(a)).sort((a,b)=>String(a.tag).localeCompare(String(b.tag),undefined,{numeric:true}));
+  let h=`<section class="hero"><h1>${esc(t("animals"))}</h1></section>`+tools("newAnimal","newAnimal");
+  if(sp.length>1)h+=`<div class="filters">${["all",...sp].map(s=>`<button type="button" data-filt="${s}" aria-pressed="${filt===s}">${s==="all"?esc(t("all")):SPECIES_ICO[s]+" "+esc(L("species",s))}</button>`).join("")}</div>`;
+  h+=list.length?`<ul class="list">${list.map(a=>row(a,`<span class="qty">${lastWeight(a.id)}<small>${esc(ageOf(a.born))}</small></span>`,`<span class="chip">${esc(L("astage",a.stage))}</span> ${esc(a.breed||"")}`)).join("")}</ul>`:`<div class="card empty">${esc(t("noAnimals"))}</div>`;
+  return h;}
+function vCrops(){
+  const list=items("crop").filter(match).sort((a,b)=>(a.stage==="closed")-(b.stage==="closed")||String(a.plot).localeCompare(String(b.plot)));
+  let h=`<section class="hero"><h1>${esc(t("crops"))}</h1></section>`+tools("newCrop","newCrop");
+  h+=list.length?`<ul class="list">${list.map(c=>row(c,c.area?`<span class="qty">${fmt(num(c.area))}<small>ha</small></span>`:"",`<span class="chip">${esc(L("cstage",c.stage))}</span> ${c.planted?fdate(c.planted):""}`)).join("")}</ul>`:`<div class="card empty">${esc(t("noCrops"))}</div>`;
+  return h;}
+function vStock(){
+  const all=items("stock");
+  const list=all.filter(s=>(filt==="all"||s.category===filt)&&match(s)).sort((a,b)=>isLow(b)-isLow(a)||a.name.localeCompare(b.name));
+  let h=`<section class="hero"><h1>${esc(t("stock"))}</h1></section>`+tools("newStock","newStock");
+  h+=`<div class="filters">${["all","product","supply"].map(s=>`<button type="button" data-filt="${s}" aria-pressed="${filt===s}">${esc(t(s))}</button>`).join("")}</div>`;
+  h+=list.length?`<ul class="list">${list.map(s=>row(s,`<span class="qty">${fmt(stockQty(s.id))}<small>${esc(L("units",s.unit))}</small></span>`,`${esc(t(s.category))}${isLow(s)?` <span class="chip low">${esc(t("lowStock"))}</span>`:""}`)).join("")}</ul>`:`<div class="card empty">${esc(t("noStock"))}</div>`;
+  return h;}
+function vProcess(){
+  const tps=items("template"),runs=items("run").sort((a,b)=>(a.status==="done")-(b.status==="done")||b.createdAt.localeCompare(a.createdAt));
+  let h=`<section class="hero"><h1>${esc(t("process"))}</h1></section><div class="tools"><button type="button" class="btn" data-act="newTemplate">+ ${esc(t("newTemplate"))}</button></div>`;
+  h+=`<h2 class="sec">${esc(t("templates"))}</h2>`;
+  h+=tps.length?`<ul class="list">${tps.map(p=>`<li style="display:flex;align-items:center"><button type="button" class="rowbtn" data-open="${p.id}"><span class="ico" aria-hidden="true">⚙️</span><span class="rt"><b>${esc(p.name)}</b><span>${esc(S.items[p.inputId]?.name||"?")} → ${esc(S.items[p.outputId]?.name||"?")} · ${(p.steps||[]).length} ${S.lang==="es"?"pasos":"steps"}</span></span></button><button type="button" class="btn small" style="margin-right:12px" data-act="startRun" data-id="${p.id}">${esc(t("start"))}</button></li>`).join("")}</ul>`:`<div class="card empty">${esc(t("noTemplates"))}</div>`;
+  if(runs.length){h+=`<h2 class="sec">${esc(t("runs"))}</h2><ul class="list">${runs.map(r=>{const tp=S.items[r.templateId];
+    return row(r,r.status==="done"?`<span class="qty">${fmt(num(r.outputQty))}<small>${esc(L("units",S.items[tp?.outputId]?.unit||""))}</small></span>`:"",
+    r.status==="done"?`<span class="chip done">${esc(t("finished"))}</span> ${fdate(r.endDate)}`:`<span class="chip">${esc(t("inProgress"))}</span> ${esc(t("stepsDone",(r.done||[]).length,(tp?.steps||[]).length))}`)}).join("")}</ul>`}
+  return h;}
+function timeline(id){const ev=evsOf(id);if(!ev.length)return`<div class="card empty">${esc(t("noHistory"))}</div>`;
+  return `<ul class="list tl">${ev.map(e=>{let extra=[];
+    if(e.qty!=null&&e.qty!=="")extra.push(`${fmt(num(e.qty))} ${esc(L("units",e.unit||""))}`);
+    if(e.price)extra.push(cop(num(e.price)));
+    if(e.type==="stage")extra.push(`→ ${esc(L(S.items[id]?.kind==="crop"?"cstage":"astage",e.stage))}`);
+    if(e.ref&&S.items[e.ref])extra.push(`${esc(t("source"))}: <button type="button" class="lang" style="padding:0;color:var(--green)" data-open="${e.ref}">${esc(itemTitle(S.items[e.ref]))}</button>`);
+    return `<li class="${e.voided?"void":""}"><span class="d">${fdate(e.date)}</span><span class="x"><b>${esc(L("ev",e.type))}</b>${e.voided?` <span class="chip">${esc(t("voided"))}</span>`:""}<br><span class="note">${extra.join(" · ")}${extra.length&&e.note?"<br>":""}${esc(e.note||"")}</span></span>${e.voided||e.type==="stage"?"":`<button type="button" class="btn ghost small" data-act="void" data-id="${e.id}">${esc(t("voidEv"))}</button>`}</li>`}).join("")}</ul>`}
+function track(i,stages,group){const cur=stages.indexOf(i.stage);
+  return `<div class="track" role="group" aria-label="${esc(t("stage"))}">${stages.map((s,k)=>`<button type="button" data-stage="${s}" class="${k<cur?"past":k===cur?"now":""}" aria-pressed="${k===cur}">${esc(L(group,s))}</button>`).join("")}</div>`}
+function vItem(){const i=S.items[route.id];if(!i||i.deleted)return`<button type="button" class="back" data-back>${esc(t("back"))}</button><div class="card empty">—</div>`;
+  let h=`<button type="button" class="back" data-back>${esc(t("back"))}</button><div class="detail-head"><span class="ico" aria-hidden="true">${itemIco(i)}</span><div><h1>${esc(itemTitle(i))}</h1>`;
+  if(i.kind==="animal"){h+=`<p class="note">${esc(L("species",i.species))} · ${esc(i.sex==="m"?t("male"):t("female"))}${i.breed?" · "+esc(i.breed):""}</p></div></div>`+track(i,ASTAGES,"astage")+
+    `<div class="facts"><div><span>${esc(t("lastWeight"))}</span>${lastWeight(i.id)}</div><div><span>${esc(t("age"))}</span>${esc(ageOf(i.born))}</div><div><span>${esc(t("born"))}</span>${fdate(i.born)||"—"}</div></div>`;}
+  else if(i.kind==="crop"){const harv=evsOf(i.id).filter(e=>e.type==="harvest"&&!e.voided);const tot={};harv.forEach(e=>tot[e.unit]=(tot[e.unit]||0)+num(e.qty));
+    h+=`<p class="note">${i.area?fmt(num(i.area))+" ha · ":""}${esc(t("planted"))}: ${fdate(i.planted)||"—"}</p></div></div>`+track(i,CSTAGES,"cstage")+
+    `<div class="facts"><div><span>${esc(L("ev","harvest"))}</span>${Object.keys(tot).length?Object.entries(tot).map(([u,v])=>`${fmt(v)} ${esc(L("units",u))}`).join(", "):"—"}</div><div><span>${esc(t("age"))}</span>${esc(ageOf(i.planted))}</div></div>`;}
+  else if(i.kind==="stock"){h+=`<p class="note">${esc(t(i.category))}</p></div></div><div class="facts"><div><span>${esc(t("inStock"))}</span><b style="font-family:var(--head);font-size:28px">${fmt(stockQty(i.id))}</b> ${esc(L("units",i.unit))}</div>${i.min!==""&&i.min!=null?`<div><span>${esc(t("minQty"))}</span>${fmt(num(i.min))} ${esc(L("units",i.unit))}</div>`:""}</div>`;}
+  else if(i.kind==="template"){h+=`<p class="note">${esc(S.items[i.inputId]?.name||"?")} → ${esc(S.items[i.outputId]?.name||"?")}</p></div></div><ul class="list steps">${(i.steps||[]).map((s,k)=>`<li><b>${k+1}.</b> ${esc(s)}</li>`).join("")}</ul>
+    <div class="actions"><button type="button" class="btn" data-act="startRun" data-id="${i.id}">${esc(t("startRun"))}</button><button type="button" class="btn ghost" data-act="editTemplate">${esc(t("edit"))}</button><button type="button" class="btn warn" data-act="del">${esc(t("remove"))}</button></div>`;
+    const rs=items("run").filter(r=>r.templateId===i.id);if(rs.length)h+=`<h2 class="sec">${esc(t("runs"))}</h2><ul class="list">${rs.map(r=>row(r,"",r.status==="done"?esc(t("finished")):esc(t("inProgress")))).join("")}</ul>`;return h;}
+  else if(i.kind==="run"){const tp=S.items[i.templateId]||{},inp=S.items[tp.inputId],out=S.items[tp.outputId];const done=new Set(i.done||[]);
+    h+=`<p class="note">${esc(tp.name||"")} · ${fdate(i.startDate)}</p></div></div><div class="facts"><div><span>${esc(t("inputP"))}</span>${fmt(num(i.inputQty))} ${esc(L("units",inp?.unit||""))} ${esc(inp?.name||"")}</div>${i.status==="done"?`<div><span>${esc(t("outputP"))}</span>${fmt(num(i.outputQty))} ${esc(L("units",out?.unit||""))} ${esc(out?.name||"")}</div><div><span>${esc(t("yield"))}</span>${num(i.inputQty)?fmt(num(i.outputQty)/num(i.inputQty)*100)+" %":"—"}</div>`:""}</div>
+    <ul class="list steps">${(tp.steps||[]).map((s,k)=>`<li><input type="checkbox" id="st${k}" data-step="${k}" ${done.has(k)?"checked":""} ${i.status==="done"?"disabled":""}><label for="st${k}" style="font-weight:400;flex-direction:row">${esc(s)}</label></li>`).join("")}</ul>
+    ${i.status==="done"?"":`<div class="actions"><button type="button" class="btn" data-act="finishRun">${esc(t("finish"))}</button></div>`}
+    ${i.note?`<p class="note">${esc(i.note)}</p>`:""}`;
+    if(inp){const srcs=evsOf(inp.id).filter(e=>e.type==="in"&&e.ref&&!e.voided).slice(0,5);if(srcs.length)h+=`<h2 class="sec">${esc(t("source"))} <small>${esc(inp.name)}</small></h2><ul class="list">${srcs.map(e=>row(S.items[e.ref]||{id:e.ref},"",`${fmt(num(e.qty))} ${esc(L("units",e.unit||""))} · ${fdate(e.date)}`)).join("")}</ul>`;}
+    return h;}
+  h+=`<div class="actions"><button type="button" class="btn" data-act="event">${esc(t("addEvent"))}</button><button type="button" class="btn ghost" data-act="editItem">${esc(t("edit"))}</button><button type="button" class="btn warn" data-act="del">${esc(t("remove"))}</button></div>`;
+  h+=`<h2 class="sec">${esc(i.kind==="stock"?t("movements"):t("history"))}</h2>`+timeline(i.id);
+  return h;}
+function vCloud(){const n=pendingCount();
+  return `<section class="hero"><h1>${esc(t("cloud"))}</h1><p>${esc(t("cloudHelp"))}</p></section>
+  <div class="card"><p><b>${esc(n?t("pending",n):S.lastSync?t("synced"):t("local"))}</b><br><span class="note">${esc(t("lastBackup"))}: ${S.lastSync?new Date(S.lastSync).toLocaleString(S.lang==="es"?"es-CO":"en-US"):esc(t("never"))}</span></p>
+  <button type="button" class="btn" data-act="json" style="width:100%">${esc(t("shareJson"))}</button>
+  <label class="btn ghost" style="flex-direction:row;justify-content:center;align-items:center;cursor:pointer;margin-top:10px">${esc(t("importJson"))}<input type="file" id="importFile" accept="application/json,.json" class="hide"></label></div>
+  <h2 class="sec">${esc(t("settings"))}</h2><div class="card"><label>${esc(t("farmName"))}<input id="farmInput" value="${esc(S.farm)}" maxlength="60"></label></div>
+  <h2 class="sec">CSV</h2><div class="card actions" style="flex-direction:column;align-items:stretch">
+  <button type="button" class="btn ghost" data-act="csvEv">${esc(t("exportCsv"))}</button>
+  <button type="button" class="btn ghost" data-act="csvInv">${esc(t("exportInv"))}</button></div>`;}
+
+/* ---------- dialogs ---------- */
+const dlg=document.getElementById("dlg"),form=document.getElementById("dlgForm");let onSubmit=null;
+function opts(list,sel,labelFn){return list.map(v=>`<option value="${esc(v)}" ${v===sel?"selected":""}>${esc(labelFn(v))}</option>`).join("")}
+function openDlg(title,body,submit,submitLabel){form.innerHTML=`<h2>${esc(title)}</h2>${body}<div class="dlg-actions"><button type="button" class="btn ghost" data-close>${esc(t("cancel"))}</button>${submit?`<button type="submit" class="btn" value="ok">${esc(submitLabel||t("save"))}</button>`:""}</div>`;
+  onSubmit=submit;dlg.showModal();const f=form.querySelector("input:not([type=hidden]),select");if(f&&window.matchMedia("(min-width:640px)").matches)f.focus();}
+form.addEventListener("submit",e=>{e.preventDefault();if(!onSubmit)return;const fd=Object.fromEntries(new FormData(form));const r=onSubmit(fd);if(r===false)return;dlg.close();save();render();if(r!=="quiet")toast(t("saved"));});
+form.addEventListener("click",e=>{if(e.target.closest("[data-close]"))dlg.close();});
+dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close();});
+const req=v=>String(v??"").trim()!=="";
+function stockSelect(name,sel,cat,allowNone){const s=items("stock").filter(x=>!cat||x.category===cat);return `<select name="${name}">${allowNone?`<option value="">${esc(t("none"))}</option>`:`<option value="">${esc(t("pick"))}</option>`}${s.map(x=>`<option value="${x.id}" ${x.id===sel?"selected":""}>${esc(x.name)} (${esc(L("units",x.unit))})</option>`).join("")}</select>`}
+
+function dlgAnimal(a){a=a||{};openDlg(a.id?t("edit"):t("newAnimal"),
+ `<div class="two"><label>${esc(t("tag"))} *<input name="tag" value="${esc(a.tag)}" inputmode="numeric" required></label><label>${esc(t("name"))}<input name="name" value="${esc(a.name)}"></label></div>
+ <div class="two"><label>${esc(t("species"))}<select name="species">${opts(Object.keys(SPECIES_ICO),a.species||"bovine",v=>L("species",v))}</select></label>
+ <label>${esc(t("sex"))}<select name="sex"><option value="f" ${a.sex!=="m"?"selected":""}>${esc(t("female"))}</option><option value="m" ${a.sex==="m"?"selected":""}>${esc(t("male"))}</option></select></label></div>
+ <div class="two"><label>${esc(t("breed"))}<input name="breed" value="${esc(a.breed)}" placeholder="Brahman, Holstein…"></label><label>${esc(t("born"))}<input type="date" name="born" value="${esc(a.born)}"></label></div>
+ <label>${esc(t("stage"))}<select name="stage">${opts(ASTAGES,a.stage||"young",v=>L("astage",v))}</select></label>
+ ${a.id?"":`<label>${esc(t("weight"))} (kg)<input name="w" inputmode="decimal"></label>`}`,
+ fd=>{if(!req(fd.tag)){toast(t("required"));return false}const it=Object.assign(a.id?a:{id:uid(),kind:"animal"},{tag:fd.tag.trim(),name:fd.name.trim(),species:fd.species,sex:fd.sex,breed:fd.breed.trim(),born:fd.born,stage:fd.stage});
+   putItem(it);if(!a.id&&req(fd.w))addEv({itemId:it.id,type:"weight",qty:num(fd.w),unit:"kg"});if(!a.id)route={tab:"item",id:it.id};});}
+function dlgCrop(c){c=c||{};openDlg(c.id?t("edit"):t("newCrop"),
+ `<div class="two"><label>${esc(t("crop"))}<select name="crop">${opts(Object.keys(CROP_ICO),c.crop||"coffee",v=>L("crops",v))}</select></label><label>${esc(t("crop"))} (${esc(L("crops","other"))})<input name="cropOther" value="${esc(c.cropOther)}"></label></div>
+ <div class="two"><label>${esc(t("plot"))} *<input name="plot" value="${esc(c.plot)}" required placeholder="La Loma"></label><label>${esc(t("area"))}<input name="area" inputmode="decimal" value="${esc(c.area)}"></label></div>
+ <div class="two"><label>${esc(t("planted"))}<input type="date" name="planted" value="${esc(c.planted||"")}"></label><label>${esc(t("stage"))}<select name="stage">${opts(CSTAGES,c.stage||"planted",v=>L("cstage",v))}</select></label></div>`,
+ fd=>{if(!req(fd.plot)){toast(t("required"));return false}const it=Object.assign(c.id?c:{id:uid(),kind:"crop"},{crop:fd.crop,cropOther:fd.cropOther.trim(),plot:fd.plot.trim(),area:fd.area,planted:fd.planted,stage:fd.stage});putItem(it);if(!c.id)route={tab:"item",id:it.id};});}
+function dlgStock(s){s=s||{};openDlg(s.id?t("edit"):t("newStock"),
+ `<label>${esc(t("name"))} *<input name="name" value="${esc(s.name)}" required placeholder="${S.lang==="es"?"Café pergamino seco":"Dry parchment coffee"}"></label>
+ <div class="two"><label>${esc(t("category"))}<select name="category"><option value="product" ${s.category!=="supply"?"selected":""}>${esc(t("product"))}</option><option value="supply" ${s.category==="supply"?"selected":""}>${esc(t("supply"))}</option></select></label>
+ <label>${esc(t("unit"))}<select name="unit">${opts(UNITS,s.unit||"kg",v=>L("units",v))}</select></label></div>
+ <div class="two">${s.id?"":`<label>${esc(t("initial"))}<input name="init" inputmode="decimal"></label>`}<label>${esc(t("minQty"))}<input name="min" inputmode="decimal" value="${esc(s.min??"")}"></label></div>`,
+ fd=>{if(!req(fd.name)){toast(t("required"));return false}const it=Object.assign(s.id?s:{id:uid(),kind:"stock"},{name:fd.name.trim(),category:fd.category,unit:fd.unit,min:fd.min});putItem(it);
+   if(!s.id&&num(fd.init))addEv({itemId:it.id,type:"in",qty:num(fd.init),unit:it.unit,note:S.lang==="es"?"Inventario inicial":"Starting stock"});});}
+function dlgTemplate(p){p=p||{};if(items("stock").length<1){toast(t("noStock"));return}
+ openDlg(p.id?t("edit"):t("newTemplate"),
+ `<label>${esc(t("name"))} *<input name="name" value="${esc(p.name)}" required placeholder="${S.lang==="es"?"Beneficio de café":"Coffee wet milling"}"></label>
+ <label>${esc(t("inputP"))} *${stockSelect("inputId",p.inputId)}</label><label>${esc(t("outputP"))} *${stockSelect("outputId",p.outputId)}</label>
+ <label>${esc(t("steps"))}<textarea name="steps" rows="6" placeholder="${S.lang==="es"?"Despulpar\nFermentar\nLavar\nSecar\nEmpacar":"Pulp\nFerment\nWash\nDry\nPack"}">${esc((p.steps||[]).join("\n"))}</textarea></label>`,
+ fd=>{if(!req(fd.name)||!fd.inputId||!fd.outputId){toast(t("required"));return false}
+   const it=Object.assign(p.id?p:{id:uid(),kind:"template"},{name:fd.name.trim(),inputId:fd.inputId,outputId:fd.outputId,steps:fd.steps.split("\n").map(s=>s.trim()).filter(Boolean)});putItem(it);});}
+function dlgStartRun(tid){const tp=S.items[tid];if(!tp)return;const inp=S.items[tp.inputId];
+ openDlg(`${t("startRun")}: ${tp.name}`,
+ `<div class="two"><label>${esc(t("inputQty"))} (${esc(L("units",inp?.unit||""))}) *<input name="qty" inputmode="decimal" required></label><label>${esc(t("date"))}<input type="date" name="date" value="${today()}"></label></div>
+ <p class="note">${esc(t("inStock"))}: ${fmt(stockQty(tp.inputId))} ${esc(L("units",inp?.unit||""))} ${esc(inp?.name||"")}</p><label>${esc(t("note"))}<input name="note"></label>`,
+ fd=>{if(!num(fd.qty)){toast(t("required"));return false}const r={id:uid(),kind:"run",templateId:tid,inputQty:num(fd.qty),startDate:fd.date||today(),status:"open",done:[],note:fd.note.trim(),name:tp.name};
+   putItem(r);addEv({itemId:tp.inputId,type:"out",qty:num(fd.qty),unit:inp?.unit,date:r.startDate,ref:r.id,note:tp.name});route={tab:"item",id:r.id};},t("start"));}
+function dlgFinishRun(r){const tp=S.items[r.templateId];const out=S.items[tp?.outputId];
+ openDlg(t("finish"),`<div class="two"><label>${esc(t("outputQty"))} (${esc(L("units",out?.unit||""))}) *<input name="qty" inputmode="decimal" required></label><label>${esc(t("date"))}<input type="date" name="date" value="${today()}"></label></div>`,
+ fd=>{if(!req(fd.qty)){toast(t("required"));return false}r.outputQty=num(fd.qty);r.endDate=fd.date||today();r.status="done";r.done=(tp.steps||[]).map((_,k)=>k);putItem(r);
+   if(out)addEv({itemId:out.id,type:"in",qty:r.outputQty,unit:out.unit,date:r.endDate,ref:r.id,note:tp.name});});}
+function dlgEvent(i,presetType){const types=i.kind==="animal"?AEVENTS:i.kind==="crop"?CEVENTS:SEVENTS;const ty=presetType||types[0];
+ const defUnit=i.kind==="stock"?i.unit:"kg";
+ openDlg(`${t("addEvent")} · ${itemTitle(i)}`,
+ `<div class="two"><label>${esc(t("type"))}<select name="type" id="evType">${opts(types,ty,v=>L("ev",v))}</select></label><label>${esc(t("date"))}<input type="date" name="date" value="${today()}"></label></div>
+ <div class="two" data-f="qty"><label>${esc(t("qty"))}<input name="qty" inputmode="decimal"></label><label>${esc(t("unit"))}<select name="unit">${opts(UNITS,defUnit,v=>L("units",v))}</select></label></div>
+ <label data-f="price">${esc(t("price"))}<input name="price" inputmode="numeric"></label>
+ <label data-f="to">${esc(t("toProduct"))}${stockSelect("to","", "product",true)}</label>
+ <div class="two" data-f="supply"><label>${esc(t("useSupply"))}${stockSelect("supply","", "supply",true)}</label><label>${esc(t("useQty"))}<input name="sqty" inputmode="decimal"></label></div>
+ <label>${esc(t("note"))}<textarea name="note" rows="2"></textarea></label>`,
+ fd=>{const ev={itemId:i.id,type:fd.type,date:fd.date||today(),note:fd.note.trim()};
+   if(req(fd.qty)){ev.qty=num(fd.qty);ev.unit=i.kind==="stock"?i.unit:fd.unit}
+   if(req(fd.price))ev.price=num(fd.price);
+   if(i.kind==="stock"&&!["adjust"].includes(ev.type)&&!ev.qty){toast(t("required"));return false}
+   if(i.kind==="stock"&&ev.type==="adjust"&&!req(fd.qty)){toast(t("required"));return false}
+   addEv(ev);
+   if(ev.type==="harvest"&&fd.to&&ev.qty){const p=S.items[fd.to];addEv({itemId:fd.to,type:"in",qty:ev.qty,unit:p.unit,date:ev.date,ref:i.id,note:L("ev","harvest")});}
+   if(["fertilize","spray","treatment","vaccine"].includes(ev.type)&&fd.supply&&num(fd.sqty)){const p=S.items[fd.supply];addEv({itemId:fd.supply,type:"out",qty:num(fd.sqty),unit:p.unit,date:ev.date,ref:i.id,note:L("ev",ev.type)});}
+   if(i.kind==="animal"&&(ev.type==="sale"||ev.type==="death")){const st=ev.type==="sale"?"sold":"dead";if(i.stage!==st){i.stage=st;putItem(i);addEv({itemId:i.id,type:"stage",stage:st,date:ev.date});}}
+   if(i.kind==="crop"&&ev.type==="harvest"&&CSTAGES.indexOf(i.stage)<CSTAGES.indexOf("harvest")){i.stage="harvest";putItem(i);addEv({itemId:i.id,type:"stage",stage:"harvest",date:ev.date});}
+ });
+ const upd=()=>{const v=form.querySelector("#evType").value;const show={qty:!["note","move","birth","death","weed","irrigate"].includes(v)||i.kind==="stock",price:["sale"].includes(v),to:v==="harvest",supply:["fertilize","spray","treatment","vaccine"].includes(v)};
+   form.querySelectorAll("[data-f]").forEach(el=>el.classList.toggle("hide",!show[el.dataset.f]));};
+ form.querySelector("#evType").addEventListener("change",upd);upd();}
+function dlgQuick(){openDlg(t("quickTitle"),`<div class="quick">
+ <button type="button" data-q="animal"><b aria-hidden="true">🐄</b>${esc(t("qAnimalEv"))}</button><button type="button" data-q="crop"><b aria-hidden="true">🌱</b>${esc(t("qCropEv"))}</button>
+ <button type="button" data-q="stock"><b aria-hidden="true">📦</b>${esc(t("qMove"))}</button><button type="button" data-q="run"><b aria-hidden="true">⚙️</b>${esc(t("qRun"))}</button>
+ <button type="button" data-q="newAnimal"><b aria-hidden="true">＋</b>${esc(t("newAnimal"))}</button><button type="button" data-q="newCrop"><b aria-hidden="true">＋</b>${esc(t("newCrop"))}</button></div>`,null);}
+function dlgPick(kind){const list=items(kind==="run"?"template":kind).filter(x=>kind!=="animal"||!["sold","dead"].includes(x.stage));
+ if(!list.length){dlg.close();({animal:dlgAnimal,crop:dlgCrop,stock:dlgStock,run:dlgTemplate})[kind]();return}
+ openDlg(t("pick"),`<ul class="list">${list.map(x=>`<li><button type="button" class="rowbtn" data-pick="${x.id}"><span class="ico" aria-hidden="true">${itemIco(x)}</span><span class="rt"><b>${esc(itemTitle(x))}</b></span></button></li>`).join("")}</ul>`,null);
+ form.dataset.pickKind=kind;}
+form.addEventListener("click",e=>{const qb=e.target.closest("[data-q]");if(qb){const k=qb.dataset.q;dlg.close();
+   if(k==="newAnimal")dlgAnimal();else if(k==="newCrop")dlgCrop();else dlgPick(k);return}
+ const pb=e.target.closest("[data-pick]");if(pb){const id=pb.dataset.pick,k=form.dataset.pickKind;dlg.close();
+   if(k==="run")dlgStartRun(id);else dlgEvent(S.items[id]);}});
+
+/* ---------- events ---------- */
+document.addEventListener("click",e=>{
+ const tb=e.target.closest("[data-tab]");if(tb){go({tab:tb.dataset.tab});return}
+ if(e.target.closest("#syncPill")){go({tab:"cloud"});return}
+ if(e.target.closest("#langBtn")){S.lang=S.lang==="es"?"en":"es";try{localStorage.setItem(KEY,JSON.stringify(S))}catch(_){}render();return}
+ if(e.target.closest("#fab")){dlgQuick();return}
+ if(dlg.open)return;
+ const ob=e.target.closest("[data-open]");if(ob&&S.items[ob.dataset.open]){go({tab:"item",id:ob.dataset.open,from:route.tab==="item"?route.from:route.tab});return}
+ if(e.target.closest("[data-back]")){go({tab:route.from||"home"});return}
+ const fb=e.target.closest("[data-filt]");if(fb){filt=fb.dataset.filt;render();return}
+ const sb=e.target.closest("[data-stage]");if(sb&&route.tab==="item"){const i=S.items[route.id];const st=sb.dataset.stage;if(i.stage!==st){i.stage=st;putItem(i);addEv({itemId:i.id,type:"stage",stage:st});save();render();}return}
+ const ab=e.target.closest("[data-act]");if(!ab)return;const a=ab.dataset.act,cur=S.items[route.id];
+ ({newAnimal:()=>dlgAnimal(),newCrop:()=>dlgCrop(),newStock:()=>dlgStock(),newTemplate:()=>dlgTemplate(),
+   startRun:()=>dlgStartRun(ab.dataset.id),finishRun:()=>dlgFinishRun(cur),event:()=>dlgEvent(cur),
+   editItem:()=>({animal:dlgAnimal,crop:dlgCrop,stock:dlgStock})[cur.kind](cur),editTemplate:()=>dlgTemplate(cur),
+   del:()=>{if(confirm(t("confirmDel"))){cur.deleted=true;putItem(cur);save();go({tab:route.from||"home"})}},
+   void:()=>{const ev=S.events[ab.dataset.id];if(ev&&confirm(t("confirmDel"))){ev.voided=true;ev.updatedAt=nowIso();S.dirty.events[ev.id]=1;save();render()}},
+   csvEv:exportEvents,csvInv:exportInv,json:exportJson})[a]?.();
+});
+document.addEventListener("change",e=>{
+ if(e.target.matches("[data-step]")){const r=S.items[route.id];const k=+e.target.dataset.step;const d=new Set(r.done||[]);e.target.checked?d.add(k):d.delete(k);r.done=[...d].sort((a,b)=>a-b);putItem(r);save();}
+ if(e.target.id==="farmInput"){S.farm=e.target.value.trim();save();toast(t("saved"))}
+ if(e.target.id==="importFile"&&e.target.files[0]){const fr=new FileReader();fr.onload=()=>{try{const d=JSON.parse(fr.result);if(!d||!d.items||!d.events)throw 0;const n=merge(d.items,d.events,false);if(d.farm&&!S.farm)S.farm=d.farm;save();render();toast(t("imported",n))}catch(_){toast(t("badFile"))}};fr.readAsText(e.target.files[0]);}
+});
+document.addEventListener("input",e=>{if(e.target.id==="q"){q=e.target.value;const pos=e.target.selectionStart;render();const n=document.getElementById("q");n.focus();try{n.setSelectionRange(pos,pos)}catch(_){}}});
+let toastT;function toast(m){document.querySelectorAll(".toast").forEach(x=>x.remove());const d=document.createElement("div");d.className="toast";d.setAttribute("role","status");d.textContent=m;document.body.appendChild(d);clearTimeout(toastT);toastT=setTimeout(()=>d.remove(),2800)}
+
+/* ---------- merge ---------- */
+function merge(rItems,rEvents,markDirty){let n=0;
+ for(const [id,it] of Object.entries(rItems||{})){if(!it||!it.id)continue;const l=S.items[id];
+   if(!l||String(it.updatedAt||"")>String(l.updatedAt||"")){S.items[id]=it;n++;if(markDirty)S.dirty.items[id]=1;else delete S.dirty.items[id];}}
+ for(const [id,ev] of Object.entries(rEvents||{})){if(!ev||!ev.id)continue;const l=S.events[id];
+   if(!l||String(ev.updatedAt||"")>String(l.updatedAt||"")){S.events[id]=ev;n++;if(markDirty)S.dirty.events[id]=1;else delete S.dirty.events[id];}}
+ return n;}
+function scheduleSync(){}
+
+/* ---------- export ---------- */
+function csv(rows){return "\uFEFF"+rows.map(r=>r.map(v=>{const s=String(v??"");return /[",;\n]/.test(s)?`"${s.replace(/"/g,'""')}"`:s}).join(",")).join("\n")}
+async function offer(filename,data,type){const file=new File([data],filename,{type});
+ if(navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file],title:filename});return true}catch(e){if(e&&e.name==="AbortError")return false}}
+ try{const a=document.createElement("a");a.href=URL.createObjectURL(file);a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);return true}catch(_){toast("Error");return false}}
+const stamp=()=>today();
+function exportEvents(){const rows=[["fecha/date","registro/record","tipo/kind","evento/event","cantidad/qty","unidad/unit","precio/price_COP","origen/source","nota/note","anulado/voided"]];
+ Object.values(S.events).sort((a,b)=>a.date.localeCompare(b.date)).forEach(e=>{const i=S.items[e.itemId];rows.push([e.date,itemTitle(i),i?.kind,L("ev",e.type)+(e.stage?` → ${e.stage}`:""),e.qty??"",e.unit??"",e.price??"",e.ref?itemTitle(S.items[e.ref]):"",e.note||"",e.voided?"1":""])});
+ offer(`finca-movimientos-${stamp()}.csv`,csv(rows),"text/csv");}
+function exportInv(){const rows=[["tipo/kind","nombre/name","etapa/stage","cantidad/qty","unidad/unit","detalle/detail"]];
+ items("stock").forEach(s=>rows.push(["stock",s.name,t(s.category),fmt(stockQty(s.id)),s.unit,isLow(s)?t("lowStock"):""]));
+ items("animal").forEach(a=>rows.push(["animal",itemTitle(a),L("astage",a.stage),1,"",`${L("species",a.species)} ${a.breed||""} ${lastWeight(a.id)}`]));
+ items("crop").forEach(c=>rows.push(["crop",itemTitle(c),L("cstage",c.stage),c.area||"","ha",c.planted||""]));
+ offer(`finca-inventario-${stamp()}.csv`,csv(rows),"text/csv");}
+async function exportJson(){const ok=await offer(`finca-copia-${stamp()}.json`,JSON.stringify({app:"finca",version:1,farm:S.farm,exportedAt:nowIso(),items:S.items,events:S.events}),"application/json");
+ if(ok){S.dirty={items:{},events:{}};S.lastSync=nowIso();try{localStorage.setItem(KEY,JSON.stringify(S))}catch(_){}render()}}
+
+/* ---------- start ---------- */
+load();render();
+if(navigator.storage&&navigator.storage.persist){navigator.storage.persisted().then(p=>p||navigator.storage.persist()).catch(()=>{})}
+if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").then(reg=>{
+  const ask=w=>{const d=document.createElement("button");d.className="toast";d.type="button";d.textContent=t("updateReady");d.onclick=()=>{w.postMessage("skip");};document.body.appendChild(d)};
+  if(reg.waiting&&navigator.serviceWorker.controller)ask(reg.waiting);
+  reg.addEventListener("updatefound",()=>{const w=reg.installing;w&&w.addEventListener("statechange",()=>{if(w.state==="installed"&&navigator.serviceWorker.controller)ask(w)})});
+}).catch(()=>{});let reloaded=false;navigator.serviceWorker.addEventListener("controllerchange",()=>{if(!reloaded){reloaded=true;location.reload()}})}
+</script>
+</body>
+</html>
