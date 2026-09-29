@@ -171,6 +171,11 @@ imported:n=>`${n} registros combinados`,badFile:"Ese archivo no es una copia de 
 cloudHelp:"Todo se guarda en este teléfono y funciona sin internet. Para no perder datos, comparta una copia de seguridad cada semana (WhatsApp, correo o AirDrop). Para juntar datos de varios teléfonos, restaure la copia de cada uno en un solo teléfono: los registros se combinan sin duplicarse.",shareJson:"Compartir copia de seguridad",lastBackup:"Última copia",persistOk:"El teléfono protegerá estos datos.",updateReady:"Hay una versión nueva. Toque para actualizar.",
 storageErr:"No se pudo guardar en el teléfono. Libere espacio y descargue una copia de seguridad.",
 quickTitle:"¿Qué quiere registrar?",qAnimalEv:"Evento de animal",qCropEv:"Labor de cultivo",qMove:"Entrada / salida de bodega",qRun:"Iniciar proceso",
+toStock:"Guardar en bodega",onHand:"¿Cuánto había en bodega antes de usarlo?",noStore:"No guardar en bodega",createNew:n=>`＋ Crear «${n}»`,newSupply:"＋ Nuevo insumo…",supplyName:"Nombre del insumo",available:"disponible",
+production:"Producción enviada a bodega",suppliesUsed:"Insumos usados",comesFrom:"De dónde viene",goesTo:"A dónde va",sell:"Vender",buyer:"Comprador",
+dailyMilk:"Ordeño del día",noMilkers:"No hay hembras de leche en etapa «Producción». Abra la vaca y toque «Producción» en su barra de etapas.",litersEach:"Litros por animal",
+calfTag:"Chapeta de la cría (opcional)",calves:"Crías",mother:"Madre",manual:"Registro manual",salesL:"Ventas",consumed:"Consumo / ajustes",
+qSale:"Venta",qHarvest:"Cosecha",weekProd:"Producción de los últimos 7 días",negative:"negativo",otherEv:"Otro evento",savedTo:n=>`Guardado en bodega: ${n}`,
 pick:"Elija…",required:"Complete los campos marcados.",days:"días",months:"meses",years:"años",theme:"Tema",
 },
 en:{home:"Home",animals:"Animals",crops:"Crops",stock:"Storage",process:"Processes",cloud:"Backup",log:"+ Log",
@@ -195,28 +200,55 @@ imported:n=>`${n} records merged`,badFile:"That file isn't a backup from this ap
 cloudHelp:"Everything is saved on this phone and works without internet. To avoid losing data, share a backup every week (WhatsApp, email or AirDrop). To combine data from several phones, restore each phone's backup on one phone: records merge without duplicates.",shareJson:"Share backup",lastBackup:"Last backup",persistOk:"This phone will protect this data.",updateReady:"A new version is ready. Tap to update.",
 storageErr:"Couldn't save on this phone. Free up space and download a backup.",
 quickTitle:"What do you want to log?",qAnimalEv:"Animal event",qCropEv:"Crop task",qMove:"Storage in / out",qRun:"Start process",
+toStock:"Store in storage",onHand:"How much was in storage before this use?",noStore:"Don't store",createNew:n=>`＋ Create “${n}”`,newSupply:"＋ New supply…",supplyName:"Supply name",available:"available",
+production:"Production sent to storage",suppliesUsed:"Supplies used",comesFrom:"Where it comes from",goesTo:"Where it goes",sell:"Sell",buyer:"Buyer",
+dailyMilk:"Daily milking",noMilkers:"No dairy females in the “Production” stage. Open the cow and tap “Production” on her stage bar.",litersEach:"Liters per animal",
+calfTag:"Calf tag (optional)",calves:"Offspring",mother:"Mother",manual:"Manual entry",salesL:"Sales",consumed:"Used / adjustments",
+qSale:"Sale",qHarvest:"Harvest",weekProd:"Production, last 7 days",negative:"negative",otherEv:"Other event",savedTo:n=>`Stored: ${n}`,
 pick:"Choose…",required:"Fill in the required fields.",days:"days",months:"months",years:"years",theme:"Theme",
 }};
 const LBL={
 es:{species:{bovine:"Bovino",pig:"Porcino",horse:"Equino",goat:"Caprino",sheep:"Ovino",poultry:"Aves",fish:"Peces",other:"Otro"},
- astage:{young:"Cría",growing:"Levante",finishing:"Ceba / novilla",production:"Producción",sold:"Vendido",dead:"Muerto"},
+ astage:{young:"Cría",growing:"Levante",finishing:"Ceba / novilla",production:"Producción",sold:"Vendido",dead:"Muerto / sacrificado"},
  cstage:{prep:"Preparación",planted:"Sembrado",growing:"Crecimiento",flowering:"Floración",harvest:"Cosecha",closed:"Terminado"},
  crops:{coffee:"Café",plantain:"Plátano",banana:"Banano",corn:"Maíz",cassava:"Yuca",cacao:"Cacao",avocado:"Aguacate",potato:"Papa",beans:"Fríjol",sugarcane:"Caña",pasture:"Pasto",other:"Otro"},
  units:{kg:"kg",lb:"libra",arroba:"arroba (12,5 kg)",carga:"carga (125 kg)",bulto:"bulto",l:"litro",unit:"unidad"},
- ev:{weight:"Pesaje",vaccine:"Vacuna",treatment:"Tratamiento",move:"Cambio de potrero",birth:"Parto",milk:"Ordeño",sale:"Venta",death:"Muerte",note:"Nota",stage:"Cambio de etapa",
+ ev:{weight:"Pesaje",vaccine:"Vacuna",treatment:"Tratamiento",move:"Cambio de potrero",birth:"Parto",milk:"Ordeño",sale:"Venta",death:"Muerte",note:"Nota",stage:"Cambio de etapa",feed:"Alimentación",eggs:"Huevos",slaughter:"Sacrificio",
    fertilize:"Abono",spray:"Fumigación",weed:"Desyerbe",irrigate:"Riego",harvest:"Cosecha",in:"Entrada",out:"Salida / consumo",adjust:"Ajuste de inventario"}},
 en:{species:{bovine:"Cattle",pig:"Pig",horse:"Horse",goat:"Goat",sheep:"Sheep",poultry:"Poultry",fish:"Fish",other:"Other"},
- astage:{young:"Calf / young",growing:"Growing",finishing:"Finishing / heifer",production:"Production",sold:"Sold",dead:"Dead"},
+ astage:{young:"Calf / young",growing:"Growing",finishing:"Finishing / heifer",production:"Production",sold:"Sold",dead:"Dead / slaughtered"},
  cstage:{prep:"Land prep",planted:"Planted",growing:"Growing",flowering:"Flowering",harvest:"Harvest",closed:"Closed"},
  crops:{coffee:"Coffee",plantain:"Plantain",banana:"Banana",corn:"Corn",cassava:"Cassava",cacao:"Cacao",avocado:"Avocado",potato:"Potato",beans:"Beans",sugarcane:"Sugarcane",pasture:"Pasture",other:"Other"},
  units:{kg:"kg",lb:"lb",arroba:"arroba (12.5 kg)",carga:"carga (125 kg)",bulto:"sack",l:"liter",unit:"unit"},
- ev:{weight:"Weighing",vaccine:"Vaccine",treatment:"Treatment",move:"Pasture move",birth:"Birth",milk:"Milking",sale:"Sale",death:"Death",note:"Note",stage:"Stage change",
+ ev:{weight:"Weighing",vaccine:"Vaccine",treatment:"Treatment",move:"Pasture move",birth:"Birth",milk:"Milking",sale:"Sale",death:"Death",note:"Note",stage:"Stage change",feed:"Feeding",eggs:"Eggs",slaughter:"Slaughter",
    fertilize:"Fertilizer",spray:"Spraying",weed:"Weeding",irrigate:"Irrigation",harvest:"Harvest",in:"In",out:"Out / used",adjust:"Stock adjustment"}}};
 const SPECIES_ICO={bovine:"🐄",pig:"🐖",horse:"🐎",goat:"🐐",sheep:"🐑",poultry:"🐔",fish:"🐟",other:"🐾"};
 const CROP_ICO={coffee:"☕",plantain:"🍌",banana:"🍌",corn:"🌽",cassava:"🥔",cacao:"🍫",avocado:"🥑",potato:"🥔",beans:"🫘",sugarcane:"🎋",pasture:"🌾",other:"🌱"};
 const ASTAGES=["young","growing","finishing","production","sold","dead"];
 const CSTAGES=["prep","planted","growing","flowering","harvest","closed"];
-const AEVENTS=["weight","vaccine","treatment","move","milk","birth","sale","death","note"];
+const AEVENTS=["milk","eggs","weight","feed","vaccine","treatment","move","birth","slaughter","sale","death","note"];
+/* default products each source sends to storage: [spanish name, english name, unit] */
+const CROP_OUT={coffee:["Café cereza","Coffee cherry","kg"],plantain:["Plátano","Plantain","kg"],banana:["Banano","Banana","kg"],corn:["Maíz","Corn","kg"],cassava:["Yuca","Cassava","kg"],
+ cacao:["Cacao en baba","Wet cacao","kg"],avocado:["Aguacate","Avocado","kg"],potato:["Papa","Potato","kg"],beans:["Fríjol","Beans","kg"],sugarcane:["Caña","Sugarcane","kg"],pasture:["Pasto de corte","Cut forage","kg"]};
+const MILK={bovine:["Leche","Milk","l"],goat:["Leche de cabra","Goat milk","l"],sheep:["Leche de oveja","Sheep milk","l"]};
+const MEAT={bovine:["Carne de res","Beef","kg"],pig:["Carne de cerdo","Pork","kg"],poultry:["Carne de pollo","Chicken","kg"],goat:["Carne de cabra","Goat meat","kg"],sheep:["Carne de cordero","Lamb","kg"],fish:["Pescado","Fish","kg"],other:["Carne","Meat","kg"]};
+const OUT_EV=["harvest","milk","eggs","slaughter"], USE_EV=["fertilize","spray","feed","vaccine","treatment"];
+function animalEvents(a){return AEVENTS.filter(e=>e==="milk"?(MILK[a.species]&&a.sex!=="m"):e==="eggs"?a.species==="poultry":e==="birth"?a.sex!=="m":true)}
+function defaultOut(i,type){let d=null;
+ if(i.kind==="crop"&&type==="harvest")d=CROP_OUT[i.crop]||[i.cropOther||"Cosecha",i.cropOther||"Harvest","kg"];
+ if(i.kind==="animal"){if(type==="milk")d=MILK[i.species];if(type==="eggs")d=["Huevos","Eggs","unit"];if(type==="slaughter")d=MEAT[i.species]||MEAT.other;}
+ return d?{name:S.lang==="es"?d[0]:d[1],names:[d[0],d[1]],unit:d[2]}:null;}
+function findStock(names){const lc=names.map(n=>n.toLowerCase());return items("stock").find(s=>lc.includes(String(s.name).toLowerCase()))}
+function outTarget(i,type){const r=i.out&&i.out[type];if(r&&S.items[r]&&!S.items[r].deleted)return r;const d=defaultOut(i,type);const f=d&&findStock(d.names);return f?f.id:"__new"}
+function makeStock(name,unit,category){const it={id:uid(),kind:"stock",name,unit,category,min:""};putItem(it);return it}
+const MASS={kg:1,lb:0.453592,arroba:12.5,carga:125};
+function conv(q,from,to){if(!from||from===to)return q;if(MASS[from]&&MASS[to])return q*MASS[from]/MASS[to];return q}
+function voidEv(id,seen=new Set()){const e=S.events[id];if(!e||seen.has(id))return;seen.add(id);e.voided=true;e.updatedAt=nowIso();S.dirty.events[id]=1;
+ (e.linked||[]).forEach(x=>voidEv(x,seen));if(e.parent)voidEv(e.parent,seen);}
+/* totals of storage movements tied to a source item */
+function flowTotals(srcId,types){const t={};for(const e of Object.values(S.events)){if(e.ref!==srcId||e.voided||!types.includes(e.type))continue;t[e.itemId]=(t[e.itemId]||0)+num(e.qty)}return t}
+function flowList(title,tot){const ks=Object.keys(tot).filter(k=>S.items[k]);if(!ks.length)return"";
+ return `<h2 class="sec">${esc(title)}</h2><ul class="list">${ks.map(k=>{const s=S.items[k];return row(s,`<span class="qty">${fmt(tot[k])}<small>${esc(L("units",s.unit))}</small></span>`,`${esc(t("inStock"))}: ${fmt(stockQty(k))} ${esc(L("units",s.unit))}`)}).join("")}</ul>`}
 const CEVENTS=["fertilize","spray","weed","irrigate","harvest","note"];
 const SEVENTS=["in","out","sale","adjust"];
 const UNITS=["kg","lb","arroba","carga","bulto","l","unit"];
@@ -289,6 +321,9 @@ function vHome(){
   if(low.length||runs.length){h+=`<h2 class="sec">${esc(t("attention"))}</h2><ul class="list">`+
     low.map(s=>row(s,`<span class="qty">${fmt(stockQty(s.id))}<small>${esc(L("units",s.unit))}</small></span>`,`<span class="chip low">${esc(t("lowStock"))}</span>`)).join("")+
     runs.map(r=>{const tp=S.items[r.templateId];return row(r,"",`${esc(t("inProgress"))} · ${esc(t("stepsDone",(r.done||[]).length,(tp?.steps||[]).length))}`)}).join("")+`</ul>`}
+  const wk=new Date(Date.now()-7*864e5).toISOString().slice(0,10),prod={};
+  evs.forEach(e=>{if(e.type==="in"&&e.ref&&!e.voided&&e.date>=wk&&S.items[e.itemId])prod[e.itemId]=(prod[e.itemId]||0)+num(e.qty)});
+  if(Object.keys(prod).length)h+=`<h2 class="sec">${esc(t("weekProd"))}</h2><ul class="list">${Object.entries(prod).map(([k,v])=>{const s=S.items[k];return row(s,`<span class="qty">+${fmt(v)}<small>${esc(L("units",s.unit))}</small></span>`,`${esc(t("inStock"))}: ${fmt(stockQty(k))} ${esc(L("units",s.unit))}`)}).join("")}</ul>`;
   h+=`<h2 class="sec">${esc(t("recent"))}</h2>`;
   h+=evs.length?`<ul class="list">${evs.slice(0,12).map(evLine).join("")}</ul>`:`<div class="card empty">${esc(t("noActivity"))}</div>`;
   return h;}
@@ -311,7 +346,7 @@ function vStock(){
   const list=all.filter(s=>(filt==="all"||s.category===filt)&&match(s)).sort((a,b)=>isLow(b)-isLow(a)||a.name.localeCompare(b.name));
   let h=`<section class="hero"><h1>${esc(t("stock"))}</h1></section>`+tools("newStock","newStock");
   h+=`<div class="filters">${["all","product","supply"].map(s=>`<button type="button" data-filt="${s}" aria-pressed="${filt===s}">${esc(t(s))}</button>`).join("")}</div>`;
-  h+=list.length?`<ul class="list">${list.map(s=>row(s,`<span class="qty">${fmt(stockQty(s.id))}<small>${esc(L("units",s.unit))}</small></span>`,`${esc(t(s.category))}${isLow(s)?` <span class="chip low">${esc(t("lowStock"))}</span>`:""}`)).join("")}</ul>`:`<div class="card empty">${esc(t("noStock"))}</div>`;
+  h+=list.length?`<ul class="list">${list.map(s=>row(s,`<span class="qty">${fmt(stockQty(s.id))}<small>${esc(L("units",s.unit))}</small></span>`,`${esc(t(s.category))}${stockQty(s.id)<0?` <span class="chip low">${esc(t("negative"))}</span>`:isLow(s)?` <span class="chip low">${esc(t("lowStock"))}</span>`:""}`)).join("")}</ul>`:`<div class="card empty">${esc(t("noStock"))}</div>`;
   return h;}
 function vProcess(){
   const tps=items("template"),runs=items("run").sort((a,b)=>(a.status==="done")-(b.status==="done")||b.createdAt.localeCompare(a.createdAt));
@@ -327,18 +362,22 @@ function timeline(id){const ev=evsOf(id);if(!ev.length)return`<div class="card e
     if(e.qty!=null&&e.qty!=="")extra.push(`${fmt(num(e.qty))} ${esc(L("units",e.unit||""))}`);
     if(e.price)extra.push(cop(num(e.price)));
     if(e.type==="stage")extra.push(`→ ${esc(L(S.items[id]?.kind==="crop"?"cstage":"astage",e.stage))}`);
+    if(e.to&&S.items[e.to])extra.push(`→ <button type="button" class="lang" style="padding:0;color:var(--green)" data-open="${e.to}">${esc(S.items[e.to].name)}</button>`);
+    if(e.supplyId&&S.items[e.supplyId])extra.push(`${esc(L("ev","out"))}: <button type="button" class="lang" style="padding:0;color:var(--green)" data-open="${e.supplyId}">${esc(S.items[e.supplyId].name)}</button> ${e.sqty?fmt(num(e.sqty))+" "+esc(L("units",S.items[e.supplyId].unit)):""}`);
+    if(e.calfId&&S.items[e.calfId])extra.push(`<button type="button" class="lang" style="padding:0;color:var(--green)" data-open="${e.calfId}">${esc(itemTitle(S.items[e.calfId]))}</button>`);
+    if(e.buyer)extra.push(esc(e.buyer));
     if(e.ref&&S.items[e.ref])extra.push(`${esc(t("source"))}: <button type="button" class="lang" style="padding:0;color:var(--green)" data-open="${e.ref}">${esc(itemTitle(S.items[e.ref]))}</button>`);
     return `<li class="${e.voided?"void":""}"><span class="d">${fdate(e.date)}</span><span class="x"><b>${esc(L("ev",e.type))}</b>${e.voided?` <span class="chip">${esc(t("voided"))}</span>`:""}<br><span class="note">${extra.join(" · ")}${extra.length&&e.note?"<br>":""}${esc(e.note||"")}</span></span>${e.voided||e.type==="stage"?"":`<button type="button" class="btn ghost small" data-act="void" data-id="${e.id}">${esc(t("voidEv"))}</button>`}</li>`}).join("")}</ul>`}
 function track(i,stages,group){const cur=stages.indexOf(i.stage);
   return `<div class="track" role="group" aria-label="${esc(t("stage"))}">${stages.map((s,k)=>`<button type="button" data-stage="${s}" class="${k<cur?"past":k===cur?"now":""}" aria-pressed="${k===cur}">${esc(L(group,s))}</button>`).join("")}</div>`}
 function vItem(){const i=S.items[route.id];if(!i||i.deleted)return`<button type="button" class="back" data-back>${esc(t("back"))}</button><div class="card empty">—</div>`;
   let h=`<button type="button" class="back" data-back>${esc(t("back"))}</button><div class="detail-head"><span class="ico" aria-hidden="true">${itemIco(i)}</span><div><h1>${esc(itemTitle(i))}</h1>`;
-  if(i.kind==="animal"){h+=`<p class="note">${esc(L("species",i.species))} · ${esc(i.sex==="m"?t("male"):t("female"))}${i.breed?" · "+esc(i.breed):""}</p></div></div>`+track(i,ASTAGES,"astage")+
+  if(i.kind==="animal"){const mom=i.motherId&&S.items[i.motherId];
+    h+=`<p class="note">${esc(L("species",i.species))} · ${esc(i.sex==="m"?t("male"):t("female"))}${i.breed?" · "+esc(i.breed):""}${mom?` · ${esc(t("mother"))}: <button type="button" class="lang" style="padding:0;color:var(--green)" data-open="${mom.id}">${esc(itemTitle(mom))}</button>`:""}</p></div></div>`+track(i,ASTAGES,"astage")+
     `<div class="facts"><div><span>${esc(t("lastWeight"))}</span>${lastWeight(i.id)}</div><div><span>${esc(t("age"))}</span>${esc(ageOf(i.born))}</div><div><span>${esc(t("born"))}</span>${fdate(i.born)||"—"}</div></div>`;}
-  else if(i.kind==="crop"){const harv=evsOf(i.id).filter(e=>e.type==="harvest"&&!e.voided);const tot={};harv.forEach(e=>tot[e.unit]=(tot[e.unit]||0)+num(e.qty));
-    h+=`<p class="note">${i.area?fmt(num(i.area))+" ha · ":""}${esc(t("planted"))}: ${fdate(i.planted)||"—"}</p></div></div>`+track(i,CSTAGES,"cstage")+
-    `<div class="facts"><div><span>${esc(L("ev","harvest"))}</span>${Object.keys(tot).length?Object.entries(tot).map(([u,v])=>`${fmt(v)} ${esc(L("units",u))}`).join(", "):"—"}</div><div><span>${esc(t("age"))}</span>${esc(ageOf(i.planted))}</div></div>`;}
-  else if(i.kind==="stock"){h+=`<p class="note">${esc(t(i.category))}</p></div></div><div class="facts"><div><span>${esc(t("inStock"))}</span><b style="font-family:var(--head);font-size:28px">${fmt(stockQty(i.id))}</b> ${esc(L("units",i.unit))}</div>${i.min!==""&&i.min!=null?`<div><span>${esc(t("minQty"))}</span>${fmt(num(i.min))} ${esc(L("units",i.unit))}</div>`:""}</div>`;}
+  else if(i.kind==="crop"){h+=`<p class="note">${i.area?fmt(num(i.area))+" ha · ":""}${esc(t("planted"))}: ${fdate(i.planted)||"—"}</p></div></div>`+track(i,CSTAGES,"cstage")+
+    `<div class="facts"><div><span>${esc(t("age"))}</span>${esc(ageOf(i.planted))}</div></div>`;}
+  else if(i.kind==="stock"){const qn=stockQty(i.id);h+=`<p class="note">${esc(t(i.category))}</p></div></div><div class="facts"><div><span>${esc(t("inStock"))}</span><b style="font-family:var(--head);font-size:28px;${qn<0?"color:var(--warn)":""}">${fmt(qn)}</b> ${esc(L("units",i.unit))}</div>${i.min!==""&&i.min!=null?`<div><span>${esc(t("minQty"))}</span>${fmt(num(i.min))} ${esc(L("units",i.unit))}</div>`:""}</div>`;}
   else if(i.kind==="template"){h+=`<p class="note">${esc(S.items[i.inputId]?.name||"?")} → ${esc(S.items[i.outputId]?.name||"?")}</p></div></div><ul class="list steps">${(i.steps||[]).map((s,k)=>`<li><b>${k+1}.</b> ${esc(s)}</li>`).join("")}</ul>
     <div class="actions"><button type="button" class="btn" data-act="startRun" data-id="${i.id}">${esc(t("startRun"))}</button><button type="button" class="btn ghost" data-act="editTemplate">${esc(t("edit"))}</button><button type="button" class="btn warn" data-act="del">${esc(t("remove"))}</button></div>`;
     const rs=items("run").filter(r=>r.templateId===i.id);if(rs.length)h+=`<h2 class="sec">${esc(t("runs"))}</h2><ul class="list">${rs.map(r=>row(r,"",r.status==="done"?esc(t("finished")):esc(t("inProgress")))).join("")}</ul>`;return h;}
@@ -349,7 +388,18 @@ function vItem(){const i=S.items[route.id];if(!i||i.deleted)return`<button type=
     ${i.note?`<p class="note">${esc(i.note)}</p>`:""}`;
     if(inp){const srcs=evsOf(inp.id).filter(e=>e.type==="in"&&e.ref&&!e.voided).slice(0,5);if(srcs.length)h+=`<h2 class="sec">${esc(t("source"))} <small>${esc(inp.name)}</small></h2><ul class="list">${srcs.map(e=>row(S.items[e.ref]||{id:e.ref},"",`${fmt(num(e.qty))} ${esc(L("units",e.unit||""))} · ${fdate(e.date)}`)).join("")}</ul>`;}
     return h;}
-  h+=`<div class="actions"><button type="button" class="btn" data-act="event">${esc(t("addEvent"))}</button><button type="button" class="btn ghost" data-act="editItem">${esc(t("edit"))}</button><button type="button" class="btn warn" data-act="del">${esc(t("remove"))}</button></div>`;
+  const prim=i.kind==="animal"?animalEvents(i).filter(e=>["milk","eggs","weight","feed"].includes(e)).slice(0,3):i.kind==="crop"?["harvest","fertilize"]:(i.category==="product"?["sale","in"]:["in","out"]);
+  h+=`<div class="actions">${prim.map((e,k)=>`<button type="button" class="btn${k?" ghost":""}" data-act="event" data-type="${e}">${esc(e==="sale"?t("sell"):L("ev",e))}</button>`).join("")}<button type="button" class="btn ghost" data-act="event">${esc(t("otherEv"))}</button></div>`;
+  if(i.kind==="stock"){const from={},to={};for(const e of Object.values(S.events)){if(e.itemId!==i.id||e.voided)continue;
+      if(e.type==="in"){const k=e.ref||"_m";from[k]=(from[k]||0)+num(e.qty)}else{const k=e.type==="sale"?"_s":e.ref||"_c";to[k]=(to[k]||0)+num(e.qty)*(e.type==="adjust"?-1:1)}}
+    const lab=k=>k==="_m"?t("manual"):k==="_s"?t("salesL"):k==="_c"?t("consumed"):itemTitle(S.items[k]);
+    const grp=(title,o)=>Object.keys(o).length?`<h2 class="sec">${esc(title)}</h2><ul class="list">${Object.entries(o).map(([k,v])=>{const src=S.items[k];
+      return src?row(src,`<span class="qty">${fmt(v)}<small>${esc(L("units",i.unit))}</small></span>`,esc(src.kind==="run"?t("process"):t(src.kind==="animal"?"animals":src.kind==="crop"?"crops":"stock"))):
+      `<li><div class="rowbtn" style="cursor:default"><span class="ico" aria-hidden="true">${k==="_s"?"💵":"✍️"}</span><span class="rt"><b>${esc(lab(k))}</b></span><span class="qty">${fmt(v)}<small>${esc(L("units",i.unit))}</small></span></div></li>`}).join("")}</ul>`:"";
+    h+=grp(t("comesFrom"),from)+grp(t("goesTo"),to);}
+  else{h+=flowList(t("production"),flowTotals(i.id,["in"]))+flowList(t("suppliesUsed"),flowTotals(i.id,["out"]));
+    if(i.kind==="animal"){const kids=items("animal").filter(a=>a.motherId===i.id);if(kids.length)h+=`<h2 class="sec">${esc(t("calves"))}</h2><ul class="list">${kids.map(a=>row(a,"",`<span class="chip">${esc(L("astage",a.stage))}</span> ${fdate(a.born)}`)).join("")}</ul>`;}}
+  h+=`<div class="actions"><button type="button" class="btn ghost small" data-act="editItem">${esc(t("edit"))}</button><button type="button" class="btn warn small" data-act="del">${esc(t("remove"))}</button></div>`;
   h+=`<h2 class="sec">${esc(i.kind==="stock"?t("movements"):t("history"))}</h2>`+timeline(i.id);
   return h;}
 function vCloud(){const n=pendingCount();
@@ -411,41 +461,75 @@ function dlgFinishRun(r){const tp=S.items[r.templateId];const out=S.items[tp?.ou
  openDlg(t("finish"),`<div class="two"><label>${esc(t("outputQty"))} (${esc(L("units",out?.unit||""))}) *<input name="qty" inputmode="decimal" required></label><label>${esc(t("date"))}<input type="date" name="date" value="${today()}"></label></div>`,
  fd=>{if(!req(fd.qty)){toast(t("required"));return false}r.outputQty=num(fd.qty);r.endDate=fd.date||today();r.status="done";r.done=(tp.steps||[]).map((_,k)=>k);putItem(r);
    if(out)addEv({itemId:out.id,type:"in",qty:r.outputQty,unit:out.unit,date:r.endDate,ref:r.id,note:tp.name});});}
-function dlgEvent(i,presetType){const types=i.kind==="animal"?AEVENTS:i.kind==="crop"?CEVENTS:SEVENTS;const ty=presetType||types[0];
+function dlgEvent(i,presetType){const types=i.kind==="animal"?animalEvents(i):i.kind==="crop"?CEVENTS:SEVENTS;const ty=presetType&&types.includes(presetType)?presetType:types[0];
  const defUnit=i.kind==="stock"?i.unit:"kg";
+ const prods=items("stock").filter(s=>s.category==="product"),sups=items("stock").filter(s=>s.category==="supply");
  openDlg(`${t("addEvent")} · ${itemTitle(i)}`,
  `<div class="two"><label>${esc(t("type"))}<select name="type" id="evType">${opts(types,ty,v=>L("ev",v))}</select></label><label>${esc(t("date"))}<input type="date" name="date" value="${today()}"></label></div>
- <div class="two" data-f="qty"><label>${esc(t("qty"))}<input name="qty" inputmode="decimal"></label><label>${esc(t("unit"))}<select name="unit">${opts(UNITS,defUnit,v=>L("units",v))}</select></label></div>
+ <label data-f="to">${esc(t("toStock"))}<select name="to" id="evTo"></select></label>
+ <div class="two" data-f="qty"><label>${esc(t("qty"))}<input name="qty" inputmode="decimal" id="evQty"></label><label>${esc(t("unit"))}<select name="unit" id="evUnit">${opts(UNITS,defUnit,v=>L("units",v))}</select></label></div>
  <label data-f="price">${esc(t("price"))}<input name="price" inputmode="numeric"></label>
- <label data-f="to">${esc(t("toProduct"))}${stockSelect("to","", "product",true)}</label>
- <div class="two" data-f="supply"><label>${esc(t("useSupply"))}${stockSelect("supply","", "supply",true)}</label><label>${esc(t("useQty"))}<input name="sqty" inputmode="decimal"></label></div>
+ <label data-f="buyer">${esc(t("buyer"))}<input name="buyer"></label>
+ <label data-f="calf">${esc(t("calfTag"))}<input name="calf" inputmode="numeric"></label>
+ <div data-f="supply" style="display:flex;flex-direction:column;gap:10px"><div class="two"><label>${esc(t("useSupply"))}<select name="supply" id="evSup"><option value="">${esc(t("none"))}</option>${sups.map(x=>`<option value="${x.id}">${esc(x.name)} · ${fmt(stockQty(x.id))} ${esc(L("units",x.unit))}</option>`).join("")}<option value="__new">${esc(t("newSupply"))}</option></select></label><label>${esc(t("useQty"))}<input name="sqty" inputmode="decimal"></label></div>
+  <div class="hide" id="newSup" style="display:flex;flex-direction:column;gap:10px"><div class="two"><label>${esc(t("supplyName"))}<input name="sname"></label><label>${esc(t("unit"))}<select name="sunit">${opts(UNITS,"kg",v=>L("units",v))}</select></label></div><label>${esc(t("onHand"))}<input name="shave" inputmode="decimal"></label></div></div>
  <label>${esc(t("note"))}<textarea name="note" rows="2"></textarea></label>`,
- fd=>{const ev={itemId:i.id,type:fd.type,date:fd.date||today(),note:fd.note.trim()};
+ fd=>{const type=fd.type,isOut=OUT_EV.includes(type)&&i.kind!=="stock";
+   const ev={itemId:i.id,type,date:fd.date||today(),note:fd.note.trim()};
    if(req(fd.qty)){ev.qty=num(fd.qty);ev.unit=i.kind==="stock"?i.unit:fd.unit}
-   if(req(fd.price))ev.price=num(fd.price);
-   if(i.kind==="stock"&&!["adjust"].includes(ev.type)&&!ev.qty){toast(t("required"));return false}
-   if(i.kind==="stock"&&ev.type==="adjust"&&!req(fd.qty)){toast(t("required"));return false}
-   addEv(ev);
-   if(ev.type==="harvest"&&fd.to&&ev.qty){const p=S.items[fd.to];addEv({itemId:fd.to,type:"in",qty:ev.qty,unit:p.unit,date:ev.date,ref:i.id,note:L("ev","harvest")});}
-   if(["fertilize","spray","treatment","vaccine"].includes(ev.type)&&fd.supply&&num(fd.sqty)){const p=S.items[fd.supply];addEv({itemId:fd.supply,type:"out",qty:num(fd.sqty),unit:p.unit,date:ev.date,ref:i.id,note:L("ev",ev.type)});}
-   if(i.kind==="animal"&&(ev.type==="sale"||ev.type==="death")){const st=ev.type==="sale"?"sold":"dead";if(i.stage!==st){i.stage=st;putItem(i);addEv({itemId:i.id,type:"stage",stage:st,date:ev.date});}}
-   if(i.kind==="crop"&&ev.type==="harvest"&&CSTAGES.indexOf(i.stage)<CSTAGES.indexOf("harvest")){i.stage="harvest";putItem(i);addEv({itemId:i.id,type:"stage",stage:"harvest",date:ev.date});}
+   if(req(fd.price))ev.price=num(fd.price);if(req(fd.buyer))ev.buyer=fd.buyer.trim();
+   if(i.kind==="stock"&&!req(fd.qty)){toast(t("required"));return false}
+   if(isOut&&fd.to&&!ev.qty){toast(t("required"));return false}
+   if(USE_EV.includes(type)&&fd.supply==="__new"&&!req(fd.sname)){toast(t("required"));return false}
+   addEv(ev);ev.linked=[];
+   if(isOut&&fd.to&&ev.qty){let tgt=fd.to==="__new"?null:S.items[fd.to];
+     if(!tgt){const d=defaultOut(i,type)||{name:L("ev",type),unit:ev.unit};tgt=makeStock(d.name,d.unit,"product")}
+     const q=conv(ev.qty,ev.unit,tgt.unit);const se=addEv({itemId:tgt.id,type:"in",qty:q,unit:tgt.unit,date:ev.date,ref:i.id,parent:ev.id,note:L("ev",type)});
+     ev.to=tgt.id;ev.linked.push(se.id);i.out=Object.assign({},i.out,{[type]:tgt.id});putItem(i);toast(t("savedTo",`${fmt(q)} ${L("units",tgt.unit)} ${tgt.name}`));}
+   if(USE_EV.includes(type)&&fd.supply&&num(fd.sqty)){let sp=fd.supply==="__new"?makeStock(fd.sname.trim(),fd.sunit,"supply"):S.items[fd.supply];
+     if(fd.supply==="__new"&&num(fd.shave))addEv({itemId:sp.id,type:"in",qty:num(fd.shave),unit:sp.unit,date:ev.date,note:t("initial")});
+     const se=addEv({itemId:sp.id,type:"out",qty:num(fd.sqty),unit:sp.unit,date:ev.date,ref:i.id,parent:ev.id,note:L("ev",type)});ev.supplyId=sp.id;ev.sqty=num(fd.sqty);ev.linked.push(se.id);}
+   if(type==="birth"&&req(fd.calf)){const c={id:uid(),kind:"animal",tag:fd.calf.trim(),name:"",species:i.species,sex:"f",breed:i.breed||"",born:ev.date,stage:"young",motherId:i.id};putItem(c);ev.calfId=c.id;}
+   if(i.kind==="animal"&&["sale","death","slaughter"].includes(type)){const st=type==="sale"?"sold":"dead";if(i.stage!==st){i.stage=st;putItem(i);addEv({itemId:i.id,type:"stage",stage:st,date:ev.date});}}
+   if(i.kind==="crop"&&type==="harvest"&&CSTAGES.indexOf(i.stage)<CSTAGES.indexOf("harvest")){i.stage="harvest";putItem(i);addEv({itemId:i.id,type:"stage",stage:"harvest",date:ev.date});}
+   S.events[ev.id]=ev;return isOut&&fd.to&&ev.qty?"quiet":undefined;
  });
- const upd=()=>{const v=form.querySelector("#evType").value;const show={qty:!["note","move","birth","death","weed","irrigate"].includes(v)||i.kind==="stock",price:["sale"].includes(v),to:v==="harvest",supply:["fertilize","spray","treatment","vaccine"].includes(v)};
+ const $f=s=>form.querySelector(s);
+ const fillTo=v=>{const sel=$f("#evTo");if(!OUT_EV.includes(v)||i.kind==="stock"){sel.innerHTML="";return}
+   const tg=outTarget(i,v),d=defaultOut(i,v);
+   sel.innerHTML=`${prods.map(x=>`<option value="${x.id}" ${x.id===tg?"selected":""}>${esc(x.name)} · ${fmt(stockQty(x.id))} ${esc(L("units",x.unit))}</option>`).join("")}${d&&tg==="__new"?`<option value="__new" selected>${esc(t("createNew",d.name))}</option>`:""}<option value="">${esc(t("noStore"))}</option>`;
+   const u=tg==="__new"?d?.unit:S.items[tg]?.unit;if(u)$f("#evUnit").value=u;};
+ const upd=()=>{const v=$f("#evType").value;fillTo(v);
+   const show={qty:!["note","move","death","weed","irrigate","vaccine","treatment","feed","fertilize","spray","birth"].includes(v)||i.kind==="stock",price:v==="sale",buyer:v==="sale",to:OUT_EV.includes(v)&&i.kind!=="stock",supply:USE_EV.includes(v),calf:v==="birth"};
+   if(i.kind==="stock")$f("#evUnit").disabled=true;
    form.querySelectorAll("[data-f]").forEach(el=>el.classList.toggle("hide",!show[el.dataset.f]));};
- form.querySelector("#evType").addEventListener("change",upd);upd();}
-function dlgQuick(){openDlg(t("quickTitle"),`<div class="quick">
- <button type="button" data-q="animal"><b aria-hidden="true">🐄</b>${esc(t("qAnimalEv"))}</button><button type="button" data-q="crop"><b aria-hidden="true">🌱</b>${esc(t("qCropEv"))}</button>
- <button type="button" data-q="stock"><b aria-hidden="true">📦</b>${esc(t("qMove"))}</button><button type="button" data-q="run"><b aria-hidden="true">⚙️</b>${esc(t("qRun"))}</button>
- <button type="button" data-q="newAnimal"><b aria-hidden="true">＋</b>${esc(t("newAnimal"))}</button><button type="button" data-q="newCrop"><b aria-hidden="true">＋</b>${esc(t("newCrop"))}</button></div>`,null);}
-function dlgPick(kind){const list=items(kind==="run"?"template":kind).filter(x=>kind!=="animal"||!["sold","dead"].includes(x.stage));
- if(!list.length){dlg.close();({animal:dlgAnimal,crop:dlgCrop,stock:dlgStock,run:dlgTemplate})[kind]();return}
- openDlg(t("pick"),`<ul class="list">${list.map(x=>`<li><button type="button" class="rowbtn" data-pick="${x.id}"><span class="ico" aria-hidden="true">${itemIco(x)}</span><span class="rt"><b>${esc(itemTitle(x))}</b></span></button></li>`).join("")}</ul>`,null);
- form.dataset.pickKind=kind;}
+ $f("#evType").addEventListener("change",upd);
+ $f("#evTo").addEventListener("change",e=>{const x=S.items[e.target.value];if(x)$f("#evUnit").value=x.unit;});
+ $f("#evSup").addEventListener("change",e=>$f("#newSup").classList.toggle("hide",e.target.value!=="__new"));
+ upd();if(OUT_EV.includes(ty))setTimeout(()=>$f("#evQty")?.focus(),50);}
+function dlgMilk(){const cows=items("animal").filter(a=>MILK[a.species]&&a.sex!=="m"&&a.stage==="production");
+ if(!cows.length){openDlg(t("dailyMilk"),`<p class="note">${esc(t("noMilkers"))}</p>`,null);return}
+ openDlg(t("dailyMilk"),`<label>${esc(t("date"))}<input type="date" name="date" value="${today()}"></label><p class="note">${esc(t("litersEach"))}</p>
+ <ul class="list">${cows.map(a=>`<li style="display:flex;align-items:center;gap:10px;padding:8px 14px"><span class="ico" aria-hidden="true">${itemIco(a)}</span><span class="rt"><b>${esc(itemTitle(a))}</b></span><input name="m_${a.id}" inputmode="decimal" aria-label="${esc(itemTitle(a))}" style="width:90px;border:1.5px solid var(--line);border-radius:10px;padding:10px;background:var(--bg)"></li>`).join("")}</ul>`,
+ fd=>{let tot={},n=0;for(const a of cows){const q=num(fd["m_"+a.id]);if(!q)continue;n++;let tg=outTarget(a,"milk");let s=tg==="__new"?null:S.items[tg];
+    if(!s){const d=defaultOut(a,"milk");s=findStock(d.names)||makeStock(d.name,d.unit,"product")}
+    const ev=addEv({itemId:a.id,type:"milk",qty:q,unit:"l",date:fd.date||today(),to:s.id});const se=addEv({itemId:s.id,type:"in",qty:conv(q,"l",s.unit),unit:s.unit,date:ev.date,ref:a.id,parent:ev.id,note:L("ev","milk")});
+    ev.linked=[se.id];a.out=Object.assign({},a.out,{milk:s.id});putItem(a);tot[s.name]=(tot[s.name]||0)+q;}
+  if(!n){toast(t("required"));return false}toast(t("savedTo",Object.entries(tot).map(([k,v])=>`${fmt(v)} l ${k}`).join(", ")));return"quiet";});}
+function dlgQuick(){const b=(q,ic,l)=>`<button type="button" data-q="${q}"><b aria-hidden="true">${ic}</b>${esc(l)}</button>`;
+ openDlg(t("quickTitle"),`<div class="quick">${b("harvest","🧺",t("qHarvest"))}${b("milk","🥛",t("dailyMilk"))}${b("sale","💵",t("qSale"))}${b("animal","🐄",t("qAnimalEv"))}${b("crop","🌱",t("qCropEv"))}${b("stock","📦",t("qMove"))}${b("run","⚙️",t("qRun"))}${b("newAnimal","＋",t("newAnimal"))}${b("newCrop","＋",t("newCrop"))}${b("newStock","＋",t("newStock"))}</div>`,null);}
+function dlgPick(kind,type){let list=items(kind==="run"?"template":kind);
+ if(kind==="animal")list=list.filter(x=>!["sold","dead"].includes(x.stage));
+ if(kind==="crop"&&type==="harvest")list=list.filter(x=>x.stage!=="closed");
+ if(kind==="stock"&&type==="sale")list=list.filter(x=>x.category==="product");
+ if(!list.length){({animal:dlgAnimal,crop:dlgCrop,stock:dlgStock,run:dlgTemplate})[kind]();return}
+ if(list.length===1&&kind!=="run"){dlgEvent(list[0],type);return}
+ openDlg(t("pick"),`<ul class="list">${list.map(x=>`<li><button type="button" class="rowbtn" data-pick="${x.id}"><span class="ico" aria-hidden="true">${itemIco(x)}</span><span class="rt"><b>${esc(itemTitle(x))}</b>${x.kind==="stock"?`<span>${fmt(stockQty(x.id))} ${esc(L("units",x.unit))}</span>`:""}</span></button></li>`).join("")}</ul>`,null);
+ form.dataset.pickKind=kind;form.dataset.pickType=type||"";}
 form.addEventListener("click",e=>{const qb=e.target.closest("[data-q]");if(qb){const k=qb.dataset.q;dlg.close();
-   if(k==="newAnimal")dlgAnimal();else if(k==="newCrop")dlgCrop();else dlgPick(k);return}
- const pb=e.target.closest("[data-pick]");if(pb){const id=pb.dataset.pick,k=form.dataset.pickKind;dlg.close();
-   if(k==="run")dlgStartRun(id);else dlgEvent(S.items[id]);}});
+   const m={newAnimal:()=>dlgAnimal(),newCrop:()=>dlgCrop(),newStock:()=>dlgStock(),milk:dlgMilk,harvest:()=>dlgPick("crop","harvest"),sale:()=>dlgPick("stock","sale")};(m[k]||(()=>dlgPick(k)))();return}
+ const pb=e.target.closest("[data-pick]");if(pb){const id=pb.dataset.pick,k=form.dataset.pickKind,ty=form.dataset.pickType||undefined;dlg.close();
+   if(k==="run")dlgStartRun(id);else dlgEvent(S.items[id],ty);}});
 
 /* ---------- events ---------- */
 document.addEventListener("click",e=>{
@@ -460,10 +544,10 @@ document.addEventListener("click",e=>{
  const sb=e.target.closest("[data-stage]");if(sb&&route.tab==="item"){const i=S.items[route.id];const st=sb.dataset.stage;if(i.stage!==st){i.stage=st;putItem(i);addEv({itemId:i.id,type:"stage",stage:st});save();render();}return}
  const ab=e.target.closest("[data-act]");if(!ab)return;const a=ab.dataset.act,cur=S.items[route.id];
  ({newAnimal:()=>dlgAnimal(),newCrop:()=>dlgCrop(),newStock:()=>dlgStock(),newTemplate:()=>dlgTemplate(),
-   startRun:()=>dlgStartRun(ab.dataset.id),finishRun:()=>dlgFinishRun(cur),event:()=>dlgEvent(cur),
+   startRun:()=>dlgStartRun(ab.dataset.id),finishRun:()=>dlgFinishRun(cur),event:()=>dlgEvent(cur,ab.dataset.type),
    editItem:()=>({animal:dlgAnimal,crop:dlgCrop,stock:dlgStock})[cur.kind](cur),editTemplate:()=>dlgTemplate(cur),
    del:()=>{if(confirm(t("confirmDel"))){cur.deleted=true;putItem(cur);save();go({tab:route.from||"home"})}},
-   void:()=>{const ev=S.events[ab.dataset.id];if(ev&&confirm(t("confirmDel"))){ev.voided=true;ev.updatedAt=nowIso();S.dirty.events[ev.id]=1;save();render()}},
+   void:()=>{const ev=S.events[ab.dataset.id];if(ev&&confirm(t("confirmDel"))){voidEv(ev.id);save();render()}},
    csvEv:exportEvents,csvInv:exportInv,json:exportJson})[a]?.();
 });
 document.addEventListener("change",e=>{

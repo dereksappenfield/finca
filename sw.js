@@ -1,5 +1,5 @@
 // Finca offline service worker. Bump VERSION whenever you change index.html.
-const VERSION = "finca-v1";
+const VERSION = "finca-v2";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest",
   "./icons/icon-192.png", "./icons/icon-512.png", "./icons/apple-touch-icon.png"];
 
