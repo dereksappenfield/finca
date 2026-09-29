@@ -111,7 +111,7 @@ h2.sec small{font-family:var(--body);font-weight:400;font-size:14px;color:var(--
 .card p{margin:0 0 10px}
 
 nav.bar{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
-nav.bar .in{max-width:720px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
+nav.bar .in{max-width:720px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr)}
 nav.bar button{background:none;border:0;padding:8px 2px 10px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:12px;cursor:pointer;color:var(--muted);min-height:62px}
 nav.bar button b{font-size:24px;font-weight:400;line-height:1}
 nav.bar button[aria-current="page"]{color:var(--ink);font-weight:700;box-shadow:inset 0 3px 0 var(--green)}
@@ -171,6 +171,13 @@ imported:n=>`${n} registros combinados`,badFile:"Ese archivo no es una copia de 
 cloudHelp:"Todo se guarda en este teléfono y funciona sin internet. Para no perder datos, comparta una copia de seguridad cada semana (WhatsApp, correo o AirDrop). Para juntar datos de varios teléfonos, restaure la copia de cada uno en un solo teléfono: los registros se combinan sin duplicarse.",shareJson:"Compartir copia de seguridad",lastBackup:"Última copia",persistOk:"El teléfono protegerá estos datos.",updateReady:"Hay una versión nueva. Toque para actualizar.",
 storageErr:"No se pudo guardar en el teléfono. Libere espacio y descargue una copia de seguridad.",
 quickTitle:"¿Qué quiere registrar?",qAnimalEv:"Evento de animal",qCropEv:"Labor de cultivo",qMove:"Entrada / salida de bodega",qRun:"Iniciar proceso",
+money:"Dinero",income:"Ingresos",costs:"Costos",profit:"Ganancia",thisMonth:"Este mes",thisYear:"Este año",allTime:"Todo",
+incomeBy:"Ingresos por producto",costsBy:"Costos por tipo",profitBy:"Ganancia por lote y animal",estNote:"Estimado desde el inicio: lo que produjo cada lote o animal, valorado al precio al que se ha vendido (o al que se vendió lo que salió de su proceso), menos lo que costó.",
+moneyMoves:"Movimientos de dinero",noMoney:"Aún no hay ventas ni costos. Registre precios al vender y costos al comprar o pagar jornales.",addExpense:"Registrar gasto",
+cost:"Costo total (COP)",amount:"Valor (COP)",expCat:"Tipo de gasto",linkTo:"¿Para qué lote, animal o proceso?",farmWide:"Toda la finca",
+buyAnimals:"Compra de animales",buyStock:"Compras para bodega",valueMade:"Valor producido",noPrice:"sin precio de venta aún",
+origin:"Origen",bornHere:"Nacido en la finca",bought:"Comprado",buyPrice:"Precio de compra (COP)",seed:"Semilla usada (opcional)",seedQty:"Cantidad de semilla",plantCost:"Costo de siembra: jornales, preparación (COP)",
+recipes:"Recetas listas",recipeAdd:n=>`＋ ${n}`,sellNow:"Ya está en bodega. Toque «Vender» cuando lo venda.",margin:"Margen",
 toStock:"Guardar en bodega",onHand:"¿Cuánto había en bodega antes de usarlo?",noStore:"No guardar en bodega",createNew:n=>`＋ Crear «${n}»`,newSupply:"＋ Nuevo insumo…",supplyName:"Nombre del insumo",available:"disponible",
 production:"Producción enviada a bodega",suppliesUsed:"Insumos usados",comesFrom:"De dónde viene",goesTo:"A dónde va",sell:"Vender",buyer:"Comprador",
 dailyMilk:"Ordeño del día",noMilkers:"No hay hembras de leche en etapa «Producción». Abra la vaca y toque «Producción» en su barra de etapas.",litersEach:"Litros por animal",
@@ -200,6 +207,13 @@ imported:n=>`${n} records merged`,badFile:"That file isn't a backup from this ap
 cloudHelp:"Everything is saved on this phone and works without internet. To avoid losing data, share a backup every week (WhatsApp, email or AirDrop). To combine data from several phones, restore each phone's backup on one phone: records merge without duplicates.",shareJson:"Share backup",lastBackup:"Last backup",persistOk:"This phone will protect this data.",updateReady:"A new version is ready. Tap to update.",
 storageErr:"Couldn't save on this phone. Free up space and download a backup.",
 quickTitle:"What do you want to log?",qAnimalEv:"Animal event",qCropEv:"Crop task",qMove:"Storage in / out",qRun:"Start process",
+money:"Money",income:"Income",costs:"Costs",profit:"Profit",thisMonth:"This month",thisYear:"This year",allTime:"All time",
+incomeBy:"Income by product",costsBy:"Costs by type",profitBy:"Profit by lot and animal",estNote:"Estimated since the start: what each lot or animal produced, valued at the price it sold for (or the price of what its process turned it into), minus what it cost.",
+moneyMoves:"Money movements",noMoney:"No sales or costs yet. Enter prices when you sell and costs when you buy or pay labor.",addExpense:"Log expense",
+cost:"Total cost (COP)",amount:"Amount (COP)",expCat:"Expense type",linkTo:"For which lot, animal or process?",farmWide:"Whole farm",
+buyAnimals:"Animal purchases",buyStock:"Storage purchases",valueMade:"Value produced",noPrice:"no sale price yet",
+origin:"Origin",bornHere:"Born on the farm",bought:"Bought",buyPrice:"Purchase price (COP)",seed:"Seed used (optional)",seedQty:"Seed quantity",plantCost:"Planting cost: labor, land prep (COP)",
+recipes:"Ready-made recipes",recipeAdd:n=>`＋ ${n}`,sellNow:"It's in storage. Tap “Sell” when you sell it.",margin:"Margin",
 toStock:"Store in storage",onHand:"How much was in storage before this use?",noStore:"Don't store",createNew:n=>`＋ Create “${n}”`,newSupply:"＋ New supply…",supplyName:"Supply name",available:"available",
 production:"Production sent to storage",suppliesUsed:"Supplies used",comesFrom:"Where it comes from",goesTo:"Where it goes",sell:"Sell",buyer:"Buyer",
 dailyMilk:"Daily milking",noMilkers:"No dairy females in the “Production” stage. Open the cow and tap “Production” on her stage bar.",litersEach:"Liters per animal",
@@ -213,14 +227,16 @@ es:{species:{bovine:"Bovino",pig:"Porcino",horse:"Equino",goat:"Caprino",sheep:"
  cstage:{prep:"Preparación",planted:"Sembrado",growing:"Crecimiento",flowering:"Floración",harvest:"Cosecha",closed:"Terminado"},
  crops:{coffee:"Café",plantain:"Plátano",banana:"Banano",corn:"Maíz",cassava:"Yuca",cacao:"Cacao",avocado:"Aguacate",potato:"Papa",beans:"Fríjol",sugarcane:"Caña",pasture:"Pasto",other:"Otro"},
  units:{kg:"kg",lb:"libra",arroba:"arroba (12,5 kg)",carga:"carga (125 kg)",bulto:"bulto",l:"litro",unit:"unidad"},
- ev:{weight:"Pesaje",vaccine:"Vacuna",treatment:"Tratamiento",move:"Cambio de potrero",birth:"Parto",milk:"Ordeño",sale:"Venta",death:"Muerte",note:"Nota",stage:"Cambio de etapa",feed:"Alimentación",eggs:"Huevos",slaughter:"Sacrificio",
+ cats:{labor:"Mano de obra / jornales",transport:"Transporte",vet:"Veterinario",machinery:"Maquinaria / mantenimiento",planting:"Siembra",fuel:"Leña / combustible",other:"Otro"},
+ ev:{weight:"Pesaje",vaccine:"Vacuna",treatment:"Tratamiento",move:"Cambio de potrero",birth:"Parto",milk:"Ordeño",sale:"Venta",death:"Muerte",note:"Nota",stage:"Cambio de etapa",feed:"Alimentación",eggs:"Huevos",slaughter:"Sacrificio",expense:"Gasto",use:"Uso de insumo",purchase:"Compra",
    fertilize:"Abono",spray:"Fumigación",weed:"Desyerbe",irrigate:"Riego",harvest:"Cosecha",in:"Entrada",out:"Salida / consumo",adjust:"Ajuste de inventario"}},
 en:{species:{bovine:"Cattle",pig:"Pig",horse:"Horse",goat:"Goat",sheep:"Sheep",poultry:"Poultry",fish:"Fish",other:"Other"},
  astage:{young:"Calf / young",growing:"Growing",finishing:"Finishing / heifer",production:"Production",sold:"Sold",dead:"Dead / slaughtered"},
  cstage:{prep:"Land prep",planted:"Planted",growing:"Growing",flowering:"Flowering",harvest:"Harvest",closed:"Closed"},
  crops:{coffee:"Coffee",plantain:"Plantain",banana:"Banana",corn:"Corn",cassava:"Cassava",cacao:"Cacao",avocado:"Avocado",potato:"Potato",beans:"Beans",sugarcane:"Sugarcane",pasture:"Pasture",other:"Other"},
  units:{kg:"kg",lb:"lb",arroba:"arroba (12.5 kg)",carga:"carga (125 kg)",bulto:"sack",l:"liter",unit:"unit"},
- ev:{weight:"Weighing",vaccine:"Vaccine",treatment:"Treatment",move:"Pasture move",birth:"Birth",milk:"Milking",sale:"Sale",death:"Death",note:"Note",stage:"Stage change",feed:"Feeding",eggs:"Eggs",slaughter:"Slaughter",
+ cats:{labor:"Labor",transport:"Transport",vet:"Veterinary",machinery:"Machinery / maintenance",planting:"Planting",fuel:"Firewood / fuel",other:"Other"},
+ ev:{weight:"Weighing",vaccine:"Vaccine",treatment:"Treatment",move:"Pasture move",birth:"Birth",milk:"Milking",sale:"Sale",death:"Death",note:"Note",stage:"Stage change",feed:"Feeding",eggs:"Eggs",slaughter:"Slaughter",expense:"Expense",use:"Supply used",purchase:"Purchase",
    fertilize:"Fertilizer",spray:"Spraying",weed:"Weeding",irrigate:"Irrigation",harvest:"Harvest",in:"In",out:"Out / used",adjust:"Stock adjustment"}}};
 const SPECIES_ICO={bovine:"🐄",pig:"🐖",horse:"🐎",goat:"🐐",sheep:"🐑",poultry:"🐔",fish:"🐟",other:"🐾"};
 const CROP_ICO={coffee:"☕",plantain:"🍌",banana:"🍌",corn:"🌽",cassava:"🥔",cacao:"🍫",avocado:"🥑",potato:"🥔",beans:"🫘",sugarcane:"🎋",pasture:"🌾",other:"🌱"};
@@ -232,7 +248,47 @@ const CROP_OUT={coffee:["Café cereza","Coffee cherry","kg"],plantain:["Plátano
  cacao:["Cacao en baba","Wet cacao","kg"],avocado:["Aguacate","Avocado","kg"],potato:["Papa","Potato","kg"],beans:["Fríjol","Beans","kg"],sugarcane:["Caña","Sugarcane","kg"],pasture:["Pasto de corte","Cut forage","kg"]};
 const MILK={bovine:["Leche","Milk","l"],goat:["Leche de cabra","Goat milk","l"],sheep:["Leche de oveja","Sheep milk","l"]};
 const MEAT={bovine:["Carne de res","Beef","kg"],pig:["Carne de cerdo","Pork","kg"],poultry:["Carne de pollo","Chicken","kg"],goat:["Carne de cabra","Goat meat","kg"],sheep:["Carne de cordero","Lamb","kg"],fish:["Pescado","Fish","kg"],other:["Carne","Meat","kg"]};
-const OUT_EV=["harvest","milk","eggs","slaughter"], USE_EV=["fertilize","spray","feed","vaccine","treatment"];
+const OUT_EV=["harvest","milk","eggs","slaughter"], USE_EV=["fertilize","spray","feed","vaccine","treatment","use"];
+const CATS=["labor","transport","vet","machinery","planting","fuel","other"];
+const PRESETS={
+ panela:{es:"Molienda de caña → panela",en:"Cane milling → panela",in:["Caña","Sugarcane","kg"],out:["Panela","Panela","kg"],
+   steps:{es:["Cortar y apilar la caña","Moler en el trapiche","Limpiar y clarificar el jugo","Evaporar y concentrar la miel","Batir y moldear","Empacar"],en:["Cut and stack cane","Mill in the trapiche","Clean and clarify the juice","Evaporate and concentrate","Beat and mold","Pack"]}},
+ coffee:{es:"Beneficio de café",en:"Coffee wet milling",in:["Café cereza","Coffee cherry","kg"],out:["Café pergamino seco","Dry parchment coffee","kg"],
+   steps:{es:["Despulpar","Fermentar","Lavar","Secar","Empacar"],en:["Pulp","Ferment","Wash","Dry","Pack"]}},
+ cacao:{es:"Fermentado y secado de cacao",en:"Cacao fermenting and drying",in:["Cacao en baba","Wet cacao","kg"],out:["Cacao seco","Dry cacao","kg"],
+   steps:{es:["Fermentar en cajón","Voltear","Secar al sol","Seleccionar","Empacar"],en:["Ferment in box","Turn","Sun dry","Sort","Pack"]}},
+ cheese:{es:"Queso campesino",en:"Farm cheese",in:["Leche","Milk","l"],out:["Queso campesino","Farm cheese","kg"],
+   steps:{es:["Filtrar la leche","Cuajar","Cortar la cuajada","Desuerar","Salar","Prensar"],en:["Strain the milk","Curdle","Cut the curd","Drain whey","Salt","Press"]}}};
+function presetExists(k){const p=PRESETS[k];return items("template").some(x=>x.name===p.es||x.name===p.en)}
+function addPreset(k){const p=PRESETS[k],lg=S.lang==="es"?0:1;
+ const inp=findStock([p.in[0],p.in[1]])||makeStock(p.in[lg],p.in[2],"product"),out=findStock([p.out[0],p.out[1]])||makeStock(p.out[lg],p.out[2],"product");
+ const it={id:uid(),kind:"template",name:p[S.lang],inputId:inp.id,outputId:out.id,steps:p.steps[S.lang].slice()};putItem(it);return it}
+const live=e=>!e.voided;
+function supplyUnitCost(id){let c=0,q=0;for(const e of Object.values(S.events))if(e.itemId===id&&e.type==="in"&&live(e)&&num(e.cost)){c+=num(e.cost);q+=num(e.qty)}return q?c/q:0}
+function runCost(rid){let c=0;for(const e of Object.values(S.events)){if(!live(e))continue;
+  if(e.itemId===rid&&num(e.cost))c+=num(e.cost);
+  if(e.ref===rid&&e.type==="out"&&S.items[e.itemId]?.category==="supply")c+=num(e.qty)*supplyUnitCost(e.itemId);}return c}
+/* value of one unit of a product: its average sale price, or (if it is only processed) what its process output is worth per unit of input, net of processing costs */
+function unitValue(id,seen=new Set()){if(seen.has(id))return null;seen.add(id);let p=0,q=0;
+ for(const e of Object.values(S.events))if(e.itemId===id&&e.type==="sale"&&live(e)&&num(e.price)&&num(e.qty)){p+=num(e.price);q+=num(e.qty)}
+ if(q)return p/q;let v=0,iq=0;
+ for(const r of items("run")){if(r.status!=="done")continue;const tp=S.items[r.templateId];if(!tp||tp.inputId!==id)continue;
+   const uv=unitValue(tp.outputId,new Set(seen));if(uv==null)continue;v+=num(r.outputQty)*uv-runCost(r.id);iq+=num(r.inputQty);}
+ return iq?v/iq:null}
+function econ(src){let cost=0,value=0,unknown=false;
+ for(const e of Object.values(S.events)){if(!live(e))continue;
+  if(e.itemId===src.id&&num(e.cost))cost+=num(e.cost);
+  if(e.itemId===src.id&&e.type==="sale"&&num(e.price))value+=num(e.price);
+  if(e.ref===src.id&&e.type==="out"&&S.items[e.itemId]?.category==="supply")cost+=num(e.qty)*supplyUnitCost(e.itemId);
+  if(e.ref===src.id&&e.type==="in"&&src.kind!=="run"){const uv=unitValue(e.itemId);if(uv==null)unknown=true;else value+=num(e.qty)*uv;}}
+ return {cost,value,margin:value-cost,unknown}}
+function econCard(i){const x=econ(i);if(!x.cost&&!x.value&&!x.unknown)return"";
+ return `<div class="facts"><div><span>${esc(t("costs"))}</span>${cop(x.cost)}</div><div><span>${esc(t("valueMade"))}</span>${cop(x.value)}${x.unknown?`<br><small class="note">+ ${esc(t("noPrice"))}</small>`:""}</div><div><span>${esc(t("margin"))}</span><b style="color:${x.margin<0?"var(--warn)":"var(--green)"}">${cop(x.margin)}</b></div></div>`}
+function cash(from){const inc={},cst={};let I=0,C=0,moves=[];
+ for(const e of Object.values(S.events)){if(!live(e)||(from&&e.date<from))continue;
+  if(e.type==="sale"&&num(e.price)){inc[e.itemId]=(inc[e.itemId]||0)+num(e.price);I+=num(e.price);moves.push(e)}
+  if(num(e.cost)){const k=e.type==="purchase"?"_animals":e.type==="in"?"_buy":(e.cat||"other");cst[k]=(cst[k]||0)+num(e.cost);C+=num(e.cost);moves.push(e)}}
+ moves.sort((a,b)=>(b.date+b.createdAt).localeCompare(a.date+a.createdAt));return {I,C,inc,cst,moves}}
 function animalEvents(a){return AEVENTS.filter(e=>e==="milk"?(MILK[a.species]&&a.sex!=="m"):e==="eggs"?a.species==="poultry":e==="birth"?a.sex!=="m":true)}
 function defaultOut(i,type){let d=null;
  if(i.kind==="crop"&&type==="harvest")d=CROP_OUT[i.crop]||[i.cropOther||"Cosecha",i.cropOther||"Harvest","kg"];
@@ -282,11 +338,11 @@ const isLow=s=>s.min!=null&&s.min!==""&&stockQty(s.id)<=num(s.min);
 const pendingCount=()=>Object.keys(S.dirty.items).length+Object.keys(S.dirty.events).length;
 function lastWeight(id){const w=evsOf(id).find(e=>e.type==="weight"&&!e.voided);return w?`${fmt(num(w.qty))} ${w.unit||"kg"}`:"—"}
 function ageOf(born){if(!born)return"—";const d=(Date.now()-new Date(born+"T12:00:00"))/864e5;if(d<60)return`${Math.max(0,Math.round(d))} ${t("days")}`;if(d<730)return`${Math.round(d/30.4)} ${t("months")}`;return`${fmt(d/365.25)} ${t("years")}`}
-function itemTitle(i){if(!i)return"?";if(i.kind==="animal")return(i.tag?`#${i.tag} `:"")+(i.name||"");if(i.kind==="crop")return`${i.plot||""} · ${i.crop==="other"&&i.cropOther?i.cropOther:L("crops",i.crop)}`;return i.name||"";}
-function itemIco(i){if(!i)return"•";if(i.kind==="animal")return SPECIES_ICO[i.species]||"🐾";if(i.kind==="crop")return CROP_ICO[i.crop]||"🌱";if(i.kind==="stock")return i.category==="supply"?"🧴":"📦";if(i.kind==="template")return"⚙️";if(i.kind==="run")return"🔄";return"•"}
+function itemTitle(i){if(!i)return"?";if(i.kind==="farm")return i.name;if(i.kind==="animal")return(i.tag?`#${i.tag} `:"")+(i.name||"");if(i.kind==="crop")return`${i.plot||""} · ${i.crop==="other"&&i.cropOther?i.cropOther:L("crops",i.crop)}`;return i.name||"";}
+function itemIco(i){if(!i)return"•";if(i.kind==="animal")return SPECIES_ICO[i.species]||"🐾";if(i.kind==="crop")return CROP_ICO[i.crop]||"🌱";if(i.kind==="stock")return i.category==="supply"?"🧴":"📦";if(i.kind==="template")return"⚙️";if(i.kind==="run")return"🔄";if(i.kind==="farm")return"🏡";return"•"}
 
 /* ---------- chrome ---------- */
-const TABS=[["home","🏠"],["animals","🐄"],["crops","🌱"],["stock","📦"],["process","⚙️"]];
+const TABS=[["home","🏠"],["animals","🐄"],["crops","🌱"],["stock","📦"],["process","⚙️"],["money","💰"]];
 let online=navigator.onLine, syncing=false;
 function renderChrome(){
   document.documentElement.lang=S.lang;
@@ -301,12 +357,12 @@ function renderChrome(){
 }
 function go(r){route=r;filt="all";q="";render();window.scrollTo(0,0)}
 function render(){renderChrome();const v=document.getElementById("view");
-  const f={home:vHome,animals:vAnimals,crops:vCrops,stock:vStock,process:vProcess,cloud:vCloud,item:vItem}[route.tab]||vHome;v.innerHTML=f();
+  const f={home:vHome,animals:vAnimals,crops:vCrops,stock:vStock,process:vProcess,money:vMoney,cloud:vCloud,item:vItem}[route.tab]||vHome;v.innerHTML=f();
   document.getElementById("fab").classList.toggle("hide",route.tab==="cloud");}
 
 /* ---------- views ---------- */
 function row(i,right,sub){return `<li><button type="button" class="rowbtn" data-open="${i.id}"><span class="ico" aria-hidden="true">${itemIco(i)}</span><span class="rt"><b>${esc(itemTitle(i))}</b><span>${sub}</span></span>${right||""}</button></li>`}
-function evLine(e){const it=S.items[e.itemId];const q=e.qty!=null&&e.qty!==""?` · ${fmt(num(e.qty))} ${esc(L("units",e.unit||"")||"")}`:"";
+function evLine(e){const it=S.items[e.itemId]||(e.itemId==="_farm"?{kind:"farm",name:S.farm||t("farmWide")}:undefined);const q=e.qty!=null&&e.qty!==""?` · ${fmt(num(e.qty))} ${esc(L("units",e.unit||"")||"")}`:"";
   return `<li class="${e.voided?"void":""}"><button type="button" class="rowbtn" data-open="${e.itemId}"><span class="ico" aria-hidden="true">${itemIco(it)}</span><span class="rt"><b>${esc(L("ev",e.type))}${q}</b><span>${esc(itemTitle(it))} · ${fdate(e.date)}</span></span></button></li>`}
 function vHome(){
   const an=items("animal").filter(a=>!["sold","dead"].includes(a.stage)),cr=items("crop").filter(c=>c.stage!=="closed"),st=items("stock"),low=st.filter(isLow);
@@ -350,22 +406,41 @@ function vStock(){
   return h;}
 function vProcess(){
   const tps=items("template"),runs=items("run").sort((a,b)=>(a.status==="done")-(b.status==="done")||b.createdAt.localeCompare(a.createdAt));
+  const avail=Object.keys(PRESETS).filter(k=>!presetExists(k));
   let h=`<section class="hero"><h1>${esc(t("process"))}</h1></section><div class="tools"><button type="button" class="btn" data-act="newTemplate">+ ${esc(t("newTemplate"))}</button></div>`;
+  if(avail.length)h+=`<h2 class="sec">${esc(t("recipes"))}</h2><div class="filters" style="flex-wrap:wrap">${avail.map(k=>`<button type="button" data-act="preset" data-k="${k}">${esc(t("recipeAdd",PRESETS[k][S.lang]))}</button>`).join("")}</div>`;
   h+=`<h2 class="sec">${esc(t("templates"))}</h2>`;
   h+=tps.length?`<ul class="list">${tps.map(p=>`<li style="display:flex;align-items:center"><button type="button" class="rowbtn" data-open="${p.id}"><span class="ico" aria-hidden="true">⚙️</span><span class="rt"><b>${esc(p.name)}</b><span>${esc(S.items[p.inputId]?.name||"?")} → ${esc(S.items[p.outputId]?.name||"?")} · ${(p.steps||[]).length} ${S.lang==="es"?"pasos":"steps"}</span></span></button><button type="button" class="btn small" style="margin-right:12px" data-act="startRun" data-id="${p.id}">${esc(t("start"))}</button></li>`).join("")}</ul>`:`<div class="card empty">${esc(t("noTemplates"))}</div>`;
   if(runs.length){h+=`<h2 class="sec">${esc(t("runs"))}</h2><ul class="list">${runs.map(r=>{const tp=S.items[r.templateId];
     return row(r,r.status==="done"?`<span class="qty">${fmt(num(r.outputQty))}<small>${esc(L("units",S.items[tp?.outputId]?.unit||""))}</small></span>`:"",
     r.status==="done"?`<span class="chip done">${esc(t("finished"))}</span> ${fdate(r.endDate)}`:`<span class="chip">${esc(t("inProgress"))}</span> ${esc(t("stepsDone",(r.done||[]).length,(tp?.steps||[]).length))}`)}).join("")}</ul>`}
   return h;}
+let per="month";
+function vMoney(){const d=new Date(),from=per==="month"?today().slice(0,8)+"01":per==="year"?today().slice(0,5)+"01-01":"";const c=cash(from),P=c.I-c.C;
+  let h=`<section class="hero"><h1>${esc(t("money"))}</h1></section>
+  <div class="filters">${[["month","thisMonth"],["year","thisYear"],["all","allTime"]].map(([k,l])=>`<button type="button" data-per="${k}" aria-pressed="${per===k}">${esc(t(l))}</button>`).join("")}</div>
+  <div class="stats"><div class="stat"><b style="font-size:22px;color:var(--green)">${cop(c.I)}</b><span>${esc(t("income"))}</span></div><div class="stat"><b style="font-size:22px">${cop(c.C)}</b><span>${esc(t("costs"))}</span></div><div class="stat"><b style="font-size:22px;color:${P<0?"var(--warn)":"var(--ink)"}">${cop(P)}</b><span>${esc(t("profit"))}</span></div></div>
+  <div class="tools"><button type="button" class="btn" data-act="expense">+ ${esc(t("addExpense"))}</button></div>`;
+  if(!c.moves.length&&per==="all")return h+`<div class="card empty">${esc(t("noMoney"))}</div>`;
+  const ik=Object.keys(c.inc).filter(k=>S.items[k]).sort((a,b)=>c.inc[b]-c.inc[a]);
+  if(ik.length)h+=`<h2 class="sec">${esc(t("incomeBy"))}</h2><ul class="list">${ik.map(k=>row(S.items[k],`<span class="qty" style="color:var(--green)">${cop(c.inc[k])}</span>`,esc(S.items[k].kind==="stock"?t(S.items[k].category):L("ev","sale")))).join("")}</ul>`;
+  const ck=Object.keys(c.cst).sort((a,b)=>c.cst[b]-c.cst[a]);
+  if(ck.length)h+=`<h2 class="sec">${esc(t("costsBy"))}</h2><ul class="list">${ck.map(k=>`<li><div class="rowbtn" style="cursor:default"><span class="rt"><b>${esc(k==="_animals"?t("buyAnimals"):k==="_buy"?t("buyStock"):L("cats",k))}</b></span><span class="qty">${cop(c.cst[k])}</span></div></li>`).join("")}</ul>`;
+  const srcs=[...items("crop"),...items("animal")].map(i=>({i,x:econ(i)})).filter(o=>o.x.cost||o.x.value||o.x.unknown).sort((a,b)=>b.x.margin-a.x.margin);
+  if(srcs.length)h+=`<h2 class="sec">${esc(t("profitBy"))}</h2><p class="note" style="margin:-4px 0 10px">${esc(t("estNote"))}</p><ul class="list">${srcs.map(({i,x})=>row(i,`<span class="qty" style="color:${x.margin<0?"var(--warn)":"var(--green)"}">${cop(x.margin)}</span>`,`${esc(t("valueMade"))} ${cop(x.value)}${x.unknown?" +":""} · ${esc(t("costs"))} ${cop(x.cost)}`)).join("")}</ul>`;
+  if(c.moves.length)h+=`<h2 class="sec">${esc(t("moneyMoves"))}</h2><ul class="list">${c.moves.slice(0,20).map(e=>{const it=S.items[e.itemId]||{kind:"farm",name:S.farm||t("farmWide")};const inc=e.type==="sale";
+    return `<li><button type="button" class="rowbtn" data-open="${e.itemId}"><span class="ico" aria-hidden="true">${itemIco(it)}</span><span class="rt"><b>${esc(L("ev",e.type))}${e.cat?" · "+esc(L("cats",e.cat)):""}</b><span>${esc(itemTitle(it))} · ${fdate(e.date)}</span></span><span class="qty" style="color:${inc?"var(--green)":"var(--warn)"}">${inc?"+":"−"}${cop(num(inc?e.price:e.cost))}</span></button></li>`}).join("")}</ul>`;
+  return h;}
 function timeline(id){const ev=evsOf(id);if(!ev.length)return`<div class="card empty">${esc(t("noHistory"))}</div>`;
   return `<ul class="list tl">${ev.map(e=>{let extra=[];
     if(e.qty!=null&&e.qty!=="")extra.push(`${fmt(num(e.qty))} ${esc(L("units",e.unit||""))}`);
-    if(e.price)extra.push(cop(num(e.price)));
+    if(e.price)extra.push(`<b style="color:var(--green)">+ ${cop(num(e.price))}</b>`);
     if(e.type==="stage")extra.push(`→ ${esc(L(S.items[id]?.kind==="crop"?"cstage":"astage",e.stage))}`);
     if(e.to&&S.items[e.to])extra.push(`→ <button type="button" class="lang" style="padding:0;color:var(--green)" data-open="${e.to}">${esc(S.items[e.to].name)}</button>`);
     if(e.supplyId&&S.items[e.supplyId])extra.push(`${esc(L("ev","out"))}: <button type="button" class="lang" style="padding:0;color:var(--green)" data-open="${e.supplyId}">${esc(S.items[e.supplyId].name)}</button> ${e.sqty?fmt(num(e.sqty))+" "+esc(L("units",S.items[e.supplyId].unit)):""}`);
     if(e.calfId&&S.items[e.calfId])extra.push(`<button type="button" class="lang" style="padding:0;color:var(--green)" data-open="${e.calfId}">${esc(itemTitle(S.items[e.calfId]))}</button>`);
     if(e.buyer)extra.push(esc(e.buyer));
+    if(num(e.cost))extra.push(`<b style="color:var(--warn)">− ${cop(num(e.cost))}</b>${e.cat?" "+esc(L("cats",e.cat)):""}`);
     if(e.ref&&S.items[e.ref])extra.push(`${esc(t("source"))}: <button type="button" class="lang" style="padding:0;color:var(--green)" data-open="${e.ref}">${esc(itemTitle(S.items[e.ref]))}</button>`);
     return `<li class="${e.voided?"void":""}"><span class="d">${fdate(e.date)}</span><span class="x"><b>${esc(L("ev",e.type))}</b>${e.voided?` <span class="chip">${esc(t("voided"))}</span>`:""}<br><span class="note">${extra.join(" · ")}${extra.length&&e.note?"<br>":""}${esc(e.note||"")}</span></span>${e.voided||e.type==="stage"?"":`<button type="button" class="btn ghost small" data-act="void" data-id="${e.id}">${esc(t("voidEv"))}</button>`}</li>`}).join("")}</ul>`}
 function track(i,stages,group){const cur=stages.indexOf(i.stage);
@@ -384,11 +459,14 @@ function vItem(){const i=S.items[route.id];if(!i||i.deleted)return`<button type=
   else if(i.kind==="run"){const tp=S.items[i.templateId]||{},inp=S.items[tp.inputId],out=S.items[tp.outputId];const done=new Set(i.done||[]);
     h+=`<p class="note">${esc(tp.name||"")} · ${fdate(i.startDate)}</p></div></div><div class="facts"><div><span>${esc(t("inputP"))}</span>${fmt(num(i.inputQty))} ${esc(L("units",inp?.unit||""))} ${esc(inp?.name||"")}</div>${i.status==="done"?`<div><span>${esc(t("outputP"))}</span>${fmt(num(i.outputQty))} ${esc(L("units",out?.unit||""))} ${esc(out?.name||"")}</div><div><span>${esc(t("yield"))}</span>${num(i.inputQty)?fmt(num(i.outputQty)/num(i.inputQty)*100)+" %":"—"}</div>`:""}</div>
     <ul class="list steps">${(tp.steps||[]).map((s,k)=>`<li><input type="checkbox" id="st${k}" data-step="${k}" ${done.has(k)?"checked":""} ${i.status==="done"?"disabled":""}><label for="st${k}" style="font-weight:400;flex-direction:row">${esc(s)}</label></li>`).join("")}</ul>
-    ${i.status==="done"?"":`<div class="actions"><button type="button" class="btn" data-act="finishRun">${esc(t("finish"))}</button></div>`}
+    <div class="actions">${i.status==="done"?"":`<button type="button" class="btn" data-act="finishRun">${esc(t("finish"))}</button>`}<button type="button" class="btn ghost" data-act="event" data-type="expense">${esc(t("addExpense"))}</button><button type="button" class="btn ghost" data-act="event" data-type="use">${esc(L("ev","use"))}</button></div>
     ${i.note?`<p class="note">${esc(i.note)}</p>`:""}`;
     if(inp){const srcs=evsOf(inp.id).filter(e=>e.type==="in"&&e.ref&&!e.voided).slice(0,5);if(srcs.length)h+=`<h2 class="sec">${esc(t("source"))} <small>${esc(inp.name)}</small></h2><ul class="list">${srcs.map(e=>row(S.items[e.ref]||{id:e.ref},"",`${fmt(num(e.qty))} ${esc(L("units",e.unit||""))} · ${fdate(e.date)}`)).join("")}</ul>`;}
+    const rc=runCost(i.id);if(rc)h+=`<div class="facts"><div><span>${esc(t("costs"))}</span>${cop(rc)}</div></div>`;
+    h+=`<h2 class="sec">${esc(t("history"))}</h2>`+timeline(i.id);
     return h;}
-  const prim=i.kind==="animal"?animalEvents(i).filter(e=>["milk","eggs","weight","feed"].includes(e)).slice(0,3):i.kind==="crop"?["harvest","fertilize"]:(i.category==="product"?["sale","in"]:["in","out"]);
+  const ended=["sold","dead"].includes(i.stage);
+  const prim=i.kind==="animal"?animalEvents(i).filter(e=>["milk","eggs","weight"].includes(e)||(!ended&&["slaughter","sale"].includes(e))):i.kind==="crop"?["harvest","fertilize"]:(i.category==="product"?["sale","in"]:["in","out"]);
   h+=`<div class="actions">${prim.map((e,k)=>`<button type="button" class="btn${k?" ghost":""}" data-act="event" data-type="${e}">${esc(e==="sale"?t("sell"):L("ev",e))}</button>`).join("")}<button type="button" class="btn ghost" data-act="event">${esc(t("otherEv"))}</button></div>`;
   if(i.kind==="stock"){const from={},to={};for(const e of Object.values(S.events)){if(e.itemId!==i.id||e.voided)continue;
       if(e.type==="in"){const k=e.ref||"_m";from[k]=(from[k]||0)+num(e.qty)}else{const k=e.type==="sale"?"_s":e.ref||"_c";to[k]=(to[k]||0)+num(e.qty)*(e.type==="adjust"?-1:1)}}
@@ -397,7 +475,7 @@ function vItem(){const i=S.items[route.id];if(!i||i.deleted)return`<button type=
       return src?row(src,`<span class="qty">${fmt(v)}<small>${esc(L("units",i.unit))}</small></span>`,esc(src.kind==="run"?t("process"):t(src.kind==="animal"?"animals":src.kind==="crop"?"crops":"stock"))):
       `<li><div class="rowbtn" style="cursor:default"><span class="ico" aria-hidden="true">${k==="_s"?"💵":"✍️"}</span><span class="rt"><b>${esc(lab(k))}</b></span><span class="qty">${fmt(v)}<small>${esc(L("units",i.unit))}</small></span></div></li>`}).join("")}</ul>`:"";
     h+=grp(t("comesFrom"),from)+grp(t("goesTo"),to);}
-  else{h+=flowList(t("production"),flowTotals(i.id,["in"]))+flowList(t("suppliesUsed"),flowTotals(i.id,["out"]));
+  else{h+=econCard(i)+flowList(t("production"),flowTotals(i.id,["in"]))+flowList(t("suppliesUsed"),flowTotals(i.id,["out"]));
     if(i.kind==="animal"){const kids=items("animal").filter(a=>a.motherId===i.id);if(kids.length)h+=`<h2 class="sec">${esc(t("calves"))}</h2><ul class="list">${kids.map(a=>row(a,"",`<span class="chip">${esc(L("astage",a.stage))}</span> ${fdate(a.born)}`)).join("")}</ul>`;}}
   h+=`<div class="actions"><button type="button" class="btn ghost small" data-act="editItem">${esc(t("edit"))}</button><button type="button" class="btn warn small" data-act="del">${esc(t("remove"))}</button></div>`;
   h+=`<h2 class="sec">${esc(i.kind==="stock"?t("movements"):t("history"))}</h2>`+timeline(i.id);
@@ -429,21 +507,38 @@ function dlgAnimal(a){a=a||{};openDlg(a.id?t("edit"):t("newAnimal"),
  <label>${esc(t("sex"))}<select name="sex"><option value="f" ${a.sex!=="m"?"selected":""}>${esc(t("female"))}</option><option value="m" ${a.sex==="m"?"selected":""}>${esc(t("male"))}</option></select></label></div>
  <div class="two"><label>${esc(t("breed"))}<input name="breed" value="${esc(a.breed)}" placeholder="Brahman, Holstein…"></label><label>${esc(t("born"))}<input type="date" name="born" value="${esc(a.born)}"></label></div>
  <label>${esc(t("stage"))}<select name="stage">${opts(ASTAGES,a.stage||"young",v=>L("astage",v))}</select></label>
- ${a.id?"":`<label>${esc(t("weight"))} (kg)<input name="w" inputmode="decimal"></label>`}`,
+ ${a.id?"":`<div class="two"><label>${esc(t("weight"))} (kg)<input name="w" inputmode="decimal"></label><label>${esc(t("origin"))}<select name="origin" id="aOrig"><option value="born">${esc(t("bornHere"))}</option><option value="bought">${esc(t("bought"))}</option></select></label></div>
+ <label class="hide" id="aPrice">${esc(t("buyPrice"))}<input name="price" inputmode="numeric"></label>`}`,
  fd=>{if(!req(fd.tag)){toast(t("required"));return false}const it=Object.assign(a.id?a:{id:uid(),kind:"animal"},{tag:fd.tag.trim(),name:fd.name.trim(),species:fd.species,sex:fd.sex,breed:fd.breed.trim(),born:fd.born,stage:fd.stage});
-   putItem(it);if(!a.id&&req(fd.w))addEv({itemId:it.id,type:"weight",qty:num(fd.w),unit:"kg"});if(!a.id)route={tab:"item",id:it.id};});}
-function dlgCrop(c){c=c||{};openDlg(c.id?t("edit"):t("newCrop"),
+   if(!a.id)it.origin=fd.origin;putItem(it);if(!a.id&&req(fd.w))addEv({itemId:it.id,type:"weight",qty:num(fd.w),unit:"kg"});
+   if(!a.id&&fd.origin==="bought"&&num(fd.price))addEv({itemId:it.id,type:"purchase",cost:num(fd.price)});
+   if(!a.id)route={tab:"item",id:it.id,from:"animals"};});
+ const o=form.querySelector("#aOrig");if(o)o.addEventListener("change",()=>form.querySelector("#aPrice").classList.toggle("hide",o.value!=="bought"));}
+function dlgCrop(c){c=c||{};const sups=items("stock").filter(s=>s.category==="supply");openDlg(c.id?t("edit"):t("newCrop"),
  `<div class="two"><label>${esc(t("crop"))}<select name="crop">${opts(Object.keys(CROP_ICO),c.crop||"coffee",v=>L("crops",v))}</select></label><label>${esc(t("crop"))} (${esc(L("crops","other"))})<input name="cropOther" value="${esc(c.cropOther)}"></label></div>
  <div class="two"><label>${esc(t("plot"))} *<input name="plot" value="${esc(c.plot)}" required placeholder="La Loma"></label><label>${esc(t("area"))}<input name="area" inputmode="decimal" value="${esc(c.area)}"></label></div>
- <div class="two"><label>${esc(t("planted"))}<input type="date" name="planted" value="${esc(c.planted||"")}"></label><label>${esc(t("stage"))}<select name="stage">${opts(CSTAGES,c.stage||"planted",v=>L("cstage",v))}</select></label></div>`,
- fd=>{if(!req(fd.plot)){toast(t("required"));return false}const it=Object.assign(c.id?c:{id:uid(),kind:"crop"},{crop:fd.crop,cropOther:fd.cropOther.trim(),plot:fd.plot.trim(),area:fd.area,planted:fd.planted,stage:fd.stage});putItem(it);if(!c.id)route={tab:"item",id:it.id};});}
+ <div class="two"><label>${esc(t("planted"))}<input type="date" name="planted" value="${esc(c.planted||"")}"></label><label>${esc(t("stage"))}<select name="stage">${opts(CSTAGES,c.stage||"planted",v=>L("cstage",v))}</select></label></div>
+ ${c.id?"":`<div class="two"><label>${esc(t("seed"))}<select name="seed"><option value="">${esc(t("none"))}</option>${sups.map(x=>`<option value="${x.id}">${esc(x.name)} · ${fmt(stockQty(x.id))} ${esc(L("units",x.unit))}</option>`).join("")}</select></label><label>${esc(t("seedQty"))}<input name="sqty" inputmode="decimal"></label></div>
+ <label>${esc(t("plantCost"))}<input name="pcost" inputmode="numeric"></label>`}`,
+ fd=>{if(!req(fd.plot)){toast(t("required"));return false}const it=Object.assign(c.id?c:{id:uid(),kind:"crop"},{crop:fd.crop,cropOther:fd.cropOther.trim(),plot:fd.plot.trim(),area:fd.area,planted:fd.planted,stage:fd.stage});putItem(it);
+   if(!c.id){const d=fd.planted||today();
+     if(fd.seed&&num(fd.sqty)){const sp=S.items[fd.seed];const ev=addEv({itemId:it.id,type:"use",date:d,supplyId:sp.id,sqty:num(fd.sqty)});const se=addEv({itemId:sp.id,type:"out",qty:num(fd.sqty),unit:sp.unit,date:d,ref:it.id,parent:ev.id,note:L("cats","planting")});ev.linked=[se.id];}
+     if(num(fd.pcost))addEv({itemId:it.id,type:"expense",cat:"planting",cost:num(fd.pcost),date:d});
+     route={tab:"item",id:it.id,from:"crops"};}});}
 function dlgStock(s){s=s||{};openDlg(s.id?t("edit"):t("newStock"),
- `<label>${esc(t("name"))} *<input name="name" value="${esc(s.name)}" required placeholder="${S.lang==="es"?"Café pergamino seco":"Dry parchment coffee"}"></label>
+ `<label>${esc(t("name"))} *<input name="name" value="${esc(s.name)}" required placeholder="${S.lang==="es"?"Semilla de caña, Urea, Concentrado…":"Cane seed, Urea, Feed…"}"></label>
  <div class="two"><label>${esc(t("category"))}<select name="category"><option value="product" ${s.category!=="supply"?"selected":""}>${esc(t("product"))}</option><option value="supply" ${s.category==="supply"?"selected":""}>${esc(t("supply"))}</option></select></label>
  <label>${esc(t("unit"))}<select name="unit">${opts(UNITS,s.unit||"kg",v=>L("units",v))}</select></label></div>
- <div class="two">${s.id?"":`<label>${esc(t("initial"))}<input name="init" inputmode="decimal"></label>`}<label>${esc(t("minQty"))}<input name="min" inputmode="decimal" value="${esc(s.min??"")}"></label></div>`,
+ ${s.id?"":`<div class="two"><label>${esc(t("initial"))}<input name="init" inputmode="decimal"></label><label>${esc(t("cost"))}<input name="cost" inputmode="numeric"></label></div>`}
+ <label>${esc(t("minQty"))}<input name="min" inputmode="decimal" value="${esc(s.min??"")}"></label>`,
  fd=>{if(!req(fd.name)){toast(t("required"));return false}const it=Object.assign(s.id?s:{id:uid(),kind:"stock"},{name:fd.name.trim(),category:fd.category,unit:fd.unit,min:fd.min});putItem(it);
-   if(!s.id&&num(fd.init))addEv({itemId:it.id,type:"in",qty:num(fd.init),unit:it.unit,note:S.lang==="es"?"Inventario inicial":"Starting stock"});});}
+   if(!s.id&&num(fd.init)){const ev={itemId:it.id,type:"in",qty:num(fd.init),unit:it.unit,note:S.lang==="es"?"Inventario inicial":"Starting stock"};if(num(fd.cost))ev.cost=num(fd.cost);addEv(ev);}});}
+function dlgExpense(pre){const opts2=[...items("crop"),...items("animal").filter(a=>!["sold","dead"].includes(a.stage)),...items("run")];
+ openDlg(t("addExpense"),`<div class="two"><label>${esc(t("amount"))} *<input name="cost" inputmode="numeric" required></label><label>${esc(t("date"))}<input type="date" name="date" value="${today()}"></label></div>
+ <label>${esc(t("expCat"))}<select name="cat">${opts(CATS,"labor",v=>L("cats",v))}</select></label>
+ <label>${esc(t("linkTo"))}<select name="link"><option value="_farm">${esc(t("farmWide"))}</option>${opts2.map(x=>`<option value="${x.id}" ${x.id===pre?"selected":""}>${itemIco(x)} ${esc(itemTitle(x))}</option>`).join("")}</select></label>
+ <label>${esc(t("note"))}<input name="note"></label>`,
+ fd=>{if(!num(fd.cost)){toast(t("required"));return false}addEv({itemId:fd.link||"_farm",type:"expense",cat:fd.cat,cost:num(fd.cost),date:fd.date||today(),note:fd.note.trim()});});}
 function dlgTemplate(p){p=p||{};if(items("stock").length<1){toast(t("noStock"));return}
  openDlg(p.id?t("edit"):t("newTemplate"),
  `<label>${esc(t("name"))} *<input name="name" value="${esc(p.name)}" required placeholder="${S.lang==="es"?"Beneficio de café":"Coffee wet milling"}"></label>
@@ -461,7 +556,7 @@ function dlgFinishRun(r){const tp=S.items[r.templateId];const out=S.items[tp?.ou
  openDlg(t("finish"),`<div class="two"><label>${esc(t("outputQty"))} (${esc(L("units",out?.unit||""))}) *<input name="qty" inputmode="decimal" required></label><label>${esc(t("date"))}<input type="date" name="date" value="${today()}"></label></div>`,
  fd=>{if(!req(fd.qty)){toast(t("required"));return false}r.outputQty=num(fd.qty);r.endDate=fd.date||today();r.status="done";r.done=(tp.steps||[]).map((_,k)=>k);putItem(r);
    if(out)addEv({itemId:out.id,type:"in",qty:r.outputQty,unit:out.unit,date:r.endDate,ref:r.id,note:tp.name});});}
-function dlgEvent(i,presetType){const types=i.kind==="animal"?animalEvents(i):i.kind==="crop"?CEVENTS:SEVENTS;const ty=presetType&&types.includes(presetType)?presetType:types[0];
+function dlgEvent(i,presetType){const types=i.kind==="animal"?[...animalEvents(i),"expense"]:i.kind==="crop"?[...CEVENTS.filter(x=>x!=="note"),"use","expense","note"]:i.kind==="run"?["expense","use","note"]:SEVENTS;const ty=presetType&&types.includes(presetType)?presetType:types[0];
  const defUnit=i.kind==="stock"?i.unit:"kg";
  const prods=items("stock").filter(s=>s.category==="product"),sups=items("stock").filter(s=>s.category==="supply");
  openDlg(`${t("addEvent")} · ${itemTitle(i)}`,
@@ -470,6 +565,7 @@ function dlgEvent(i,presetType){const types=i.kind==="animal"?animalEvents(i):i.
  <div class="two" data-f="qty"><label>${esc(t("qty"))}<input name="qty" inputmode="decimal" id="evQty"></label><label>${esc(t("unit"))}<select name="unit" id="evUnit">${opts(UNITS,defUnit,v=>L("units",v))}</select></label></div>
  <label data-f="price">${esc(t("price"))}<input name="price" inputmode="numeric"></label>
  <label data-f="buyer">${esc(t("buyer"))}<input name="buyer"></label>
+ <div class="two" data-f="cost"><label>${esc(t("cost"))}<input name="cost" inputmode="numeric"></label><label data-f="cat">${esc(t("expCat"))}<select name="cat">${opts(CATS,"labor",v=>L("cats",v))}</select></label></div>
  <label data-f="calf">${esc(t("calfTag"))}<input name="calf" inputmode="numeric"></label>
  <div data-f="supply" style="display:flex;flex-direction:column;gap:10px"><div class="two"><label>${esc(t("useSupply"))}<select name="supply" id="evSup"><option value="">${esc(t("none"))}</option>${sups.map(x=>`<option value="${x.id}">${esc(x.name)} · ${fmt(stockQty(x.id))} ${esc(L("units",x.unit))}</option>`).join("")}<option value="__new">${esc(t("newSupply"))}</option></select></label><label>${esc(t("useQty"))}<input name="sqty" inputmode="decimal"></label></div>
   <div class="hide" id="newSup" style="display:flex;flex-direction:column;gap:10px"><div class="two"><label>${esc(t("supplyName"))}<input name="sname"></label><label>${esc(t("unit"))}<select name="sunit">${opts(UNITS,"kg",v=>L("units",v))}</select></label></div><label>${esc(t("onHand"))}<input name="shave" inputmode="decimal"></label></div></div>
@@ -478,6 +574,7 @@ function dlgEvent(i,presetType){const types=i.kind==="animal"?animalEvents(i):i.
    const ev={itemId:i.id,type,date:fd.date||today(),note:fd.note.trim()};
    if(req(fd.qty)){ev.qty=num(fd.qty);ev.unit=i.kind==="stock"?i.unit:fd.unit}
    if(req(fd.price))ev.price=num(fd.price);if(req(fd.buyer))ev.buyer=fd.buyer.trim();
+   if(num(fd.cost)&&(type==="expense"||type==="in"))ev.cost=num(fd.cost);if(type==="expense"){if(!ev.cost){toast(t("required"));return false}ev.cat=fd.cat;delete ev.qty;}
    if(i.kind==="stock"&&!req(fd.qty)){toast(t("required"));return false}
    if(isOut&&fd.to&&!ev.qty){toast(t("required"));return false}
    if(USE_EV.includes(type)&&fd.supply==="__new"&&!req(fd.sname)){toast(t("required"));return false}
@@ -485,7 +582,8 @@ function dlgEvent(i,presetType){const types=i.kind==="animal"?animalEvents(i):i.
    if(isOut&&fd.to&&ev.qty){let tgt=fd.to==="__new"?null:S.items[fd.to];
      if(!tgt){const d=defaultOut(i,type)||{name:L("ev",type),unit:ev.unit};tgt=makeStock(d.name,d.unit,"product")}
      const q=conv(ev.qty,ev.unit,tgt.unit);const se=addEv({itemId:tgt.id,type:"in",qty:q,unit:tgt.unit,date:ev.date,ref:i.id,parent:ev.id,note:L("ev",type)});
-     ev.to=tgt.id;ev.linked.push(se.id);i.out=Object.assign({},i.out,{[type]:tgt.id});putItem(i);toast(t("savedTo",`${fmt(q)} ${L("units",tgt.unit)} ${tgt.name}`));}
+     ev.to=tgt.id;ev.linked.push(se.id);i.out=Object.assign({},i.out,{[type]:tgt.id});putItem(i);toast(t("savedTo",`${fmt(q)} ${L("units",tgt.unit)} ${tgt.name}`));
+     if(type==="slaughter"){route={tab:"item",id:tgt.id,from:"stock"};setTimeout(()=>toast(t("sellNow")),2900);}}
    if(USE_EV.includes(type)&&fd.supply&&num(fd.sqty)){let sp=fd.supply==="__new"?makeStock(fd.sname.trim(),fd.sunit,"supply"):S.items[fd.supply];
      if(fd.supply==="__new"&&num(fd.shave))addEv({itemId:sp.id,type:"in",qty:num(fd.shave),unit:sp.unit,date:ev.date,note:t("initial")});
      const se=addEv({itemId:sp.id,type:"out",qty:num(fd.sqty),unit:sp.unit,date:ev.date,ref:i.id,parent:ev.id,note:L("ev",type)});ev.supplyId=sp.id;ev.sqty=num(fd.sqty);ev.linked.push(se.id);}
@@ -500,7 +598,7 @@ function dlgEvent(i,presetType){const types=i.kind==="animal"?animalEvents(i):i.
    sel.innerHTML=`${prods.map(x=>`<option value="${x.id}" ${x.id===tg?"selected":""}>${esc(x.name)} · ${fmt(stockQty(x.id))} ${esc(L("units",x.unit))}</option>`).join("")}${d&&tg==="__new"?`<option value="__new" selected>${esc(t("createNew",d.name))}</option>`:""}<option value="">${esc(t("noStore"))}</option>`;
    const u=tg==="__new"?d?.unit:S.items[tg]?.unit;if(u)$f("#evUnit").value=u;};
  const upd=()=>{const v=$f("#evType").value;fillTo(v);
-   const show={qty:!["note","move","death","weed","irrigate","vaccine","treatment","feed","fertilize","spray","birth"].includes(v)||i.kind==="stock",price:v==="sale",buyer:v==="sale",to:OUT_EV.includes(v)&&i.kind!=="stock",supply:USE_EV.includes(v),calf:v==="birth"};
+   const show={cost:v==="expense"||(i.kind==="stock"&&v==="in"),cat:v==="expense",qty:(!["note","move","death","weed","irrigate","vaccine","treatment","feed","fertilize","spray","birth","expense","use"].includes(v)&&i.kind!=="run")||i.kind==="stock",price:v==="sale",buyer:v==="sale",to:OUT_EV.includes(v)&&i.kind!=="stock",supply:USE_EV.includes(v),calf:v==="birth"};
    if(i.kind==="stock")$f("#evUnit").disabled=true;
    form.querySelectorAll("[data-f]").forEach(el=>el.classList.toggle("hide",!show[el.dataset.f]));};
  $f("#evType").addEventListener("change",upd);
@@ -517,7 +615,7 @@ function dlgMilk(){const cows=items("animal").filter(a=>MILK[a.species]&&a.sex!=
     ev.linked=[se.id];a.out=Object.assign({},a.out,{milk:s.id});putItem(a);tot[s.name]=(tot[s.name]||0)+q;}
   if(!n){toast(t("required"));return false}toast(t("savedTo",Object.entries(tot).map(([k,v])=>`${fmt(v)} l ${k}`).join(", ")));return"quiet";});}
 function dlgQuick(){const b=(q,ic,l)=>`<button type="button" data-q="${q}"><b aria-hidden="true">${ic}</b>${esc(l)}</button>`;
- openDlg(t("quickTitle"),`<div class="quick">${b("harvest","🧺",t("qHarvest"))}${b("milk","🥛",t("dailyMilk"))}${b("sale","💵",t("qSale"))}${b("animal","🐄",t("qAnimalEv"))}${b("crop","🌱",t("qCropEv"))}${b("stock","📦",t("qMove"))}${b("run","⚙️",t("qRun"))}${b("newAnimal","＋",t("newAnimal"))}${b("newCrop","＋",t("newCrop"))}${b("newStock","＋",t("newStock"))}</div>`,null);}
+ openDlg(t("quickTitle"),`<div class="quick">${b("harvest","🧺",t("qHarvest"))}${b("milk","🥛",t("dailyMilk"))}${b("sale","💵",t("qSale"))}${b("animal","🐄",t("qAnimalEv"))}${b("crop","🌱",t("qCropEv"))}${b("stock","📦",t("qMove"))}${b("run","⚙️",t("qRun"))}${b("newAnimal","＋",t("newAnimal"))}${b("newCrop","＋",t("newCrop"))}${b("expense","💸",t("addExpense"))}${b("newStock","＋",t("newStock"))}</div>`,null);}
 function dlgPick(kind,type){let list=items(kind==="run"?"template":kind);
  if(kind==="animal")list=list.filter(x=>!["sold","dead"].includes(x.stage));
  if(kind==="crop"&&type==="harvest")list=list.filter(x=>x.stage!=="closed");
@@ -527,7 +625,7 @@ function dlgPick(kind,type){let list=items(kind==="run"?"template":kind);
  openDlg(t("pick"),`<ul class="list">${list.map(x=>`<li><button type="button" class="rowbtn" data-pick="${x.id}"><span class="ico" aria-hidden="true">${itemIco(x)}</span><span class="rt"><b>${esc(itemTitle(x))}</b>${x.kind==="stock"?`<span>${fmt(stockQty(x.id))} ${esc(L("units",x.unit))}</span>`:""}</span></button></li>`).join("")}</ul>`,null);
  form.dataset.pickKind=kind;form.dataset.pickType=type||"";}
 form.addEventListener("click",e=>{const qb=e.target.closest("[data-q]");if(qb){const k=qb.dataset.q;dlg.close();
-   const m={newAnimal:()=>dlgAnimal(),newCrop:()=>dlgCrop(),newStock:()=>dlgStock(),milk:dlgMilk,harvest:()=>dlgPick("crop","harvest"),sale:()=>dlgPick("stock","sale")};(m[k]||(()=>dlgPick(k)))();return}
+   const m={newAnimal:()=>dlgAnimal(),newCrop:()=>dlgCrop(),newStock:()=>dlgStock(),milk:dlgMilk,expense:()=>dlgExpense(route.tab==="item"?route.id:""),harvest:()=>dlgPick("crop","harvest"),sale:()=>dlgPick("stock","sale")};(m[k]||(()=>dlgPick(k)))();return}
  const pb=e.target.closest("[data-pick]");if(pb){const id=pb.dataset.pick,k=form.dataset.pickKind,ty=form.dataset.pickType||undefined;dlg.close();
    if(k==="run")dlgStartRun(id);else dlgEvent(S.items[id],ty);}});
 
@@ -540,6 +638,7 @@ document.addEventListener("click",e=>{
  if(dlg.open)return;
  const ob=e.target.closest("[data-open]");if(ob&&S.items[ob.dataset.open]){go({tab:"item",id:ob.dataset.open,from:route.tab==="item"?route.from:route.tab});return}
  if(e.target.closest("[data-back]")){go({tab:route.from||"home"});return}
+ const pr=e.target.closest("[data-per]");if(pr){per=pr.dataset.per;render();return}
  const fb=e.target.closest("[data-filt]");if(fb){filt=fb.dataset.filt;render();return}
  const sb=e.target.closest("[data-stage]");if(sb&&route.tab==="item"){const i=S.items[route.id];const st=sb.dataset.stage;if(i.stage!==st){i.stage=st;putItem(i);addEv({itemId:i.id,type:"stage",stage:st});save();render();}return}
  const ab=e.target.closest("[data-act]");if(!ab)return;const a=ab.dataset.act,cur=S.items[route.id];
@@ -548,7 +647,7 @@ document.addEventListener("click",e=>{
    editItem:()=>({animal:dlgAnimal,crop:dlgCrop,stock:dlgStock})[cur.kind](cur),editTemplate:()=>dlgTemplate(cur),
    del:()=>{if(confirm(t("confirmDel"))){cur.deleted=true;putItem(cur);save();go({tab:route.from||"home"})}},
    void:()=>{const ev=S.events[ab.dataset.id];if(ev&&confirm(t("confirmDel"))){voidEv(ev.id);save();render()}},
-   csvEv:exportEvents,csvInv:exportInv,json:exportJson})[a]?.();
+   preset:()=>{addPreset(ab.dataset.k);save();render();toast(t("saved"))},expense:()=>dlgExpense(),csvEv:exportEvents,csvInv:exportInv,json:exportJson})[a]?.();
 });
 document.addEventListener("change",e=>{
  if(e.target.matches("[data-step]")){const r=S.items[route.id];const k=+e.target.dataset.step;const d=new Set(r.done||[]);e.target.checked?d.add(k):d.delete(k);r.done=[...d].sort((a,b)=>a-b);putItem(r);save();}
@@ -573,8 +672,8 @@ async function offer(filename,data,type){const file=new File([data],filename,{ty
  if(navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file],title:filename});return true}catch(e){if(e&&e.name==="AbortError")return false}}
  try{const a=document.createElement("a");a.href=URL.createObjectURL(file);a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);return true}catch(_){toast("Error");return false}}
 const stamp=()=>today();
-function exportEvents(){const rows=[["fecha/date","registro/record","tipo/kind","evento/event","cantidad/qty","unidad/unit","precio/price_COP","origen/source","nota/note","anulado/voided"]];
- Object.values(S.events).sort((a,b)=>a.date.localeCompare(b.date)).forEach(e=>{const i=S.items[e.itemId];rows.push([e.date,itemTitle(i),i?.kind,L("ev",e.type)+(e.stage?` → ${e.stage}`:""),e.qty??"",e.unit??"",e.price??"",e.ref?itemTitle(S.items[e.ref]):"",e.note||"",e.voided?"1":""])});
+function exportEvents(){const rows=[["fecha/date","registro/record","tipo/kind","evento/event","cantidad/qty","unidad/unit","ingreso/income_COP","costo/cost_COP","origen/source","nota/note","anulado/voided"]];
+ Object.values(S.events).sort((a,b)=>a.date.localeCompare(b.date)).forEach(e=>{const i=S.items[e.itemId];rows.push([e.date,e.itemId==="_farm"?(S.farm||"finca"):itemTitle(i),i?.kind||"farm",L("ev",e.type)+(e.stage?` → ${e.stage}`:""),e.qty??"",e.unit??"",e.price??"",e.cost??"",e.ref?itemTitle(S.items[e.ref]):"",e.note||"",e.voided?"1":""])});
  offer(`finca-movimientos-${stamp()}.csv`,csv(rows),"text/csv");}
 function exportInv(){const rows=[["tipo/kind","nombre/name","etapa/stage","cantidad/qty","unidad/unit","detalle/detail"]];
  items("stock").forEach(s=>rows.push(["stock",s.name,t(s.category),fmt(stockQty(s.id)),s.unit,isLow(s)?t("lowStock"):""]));
